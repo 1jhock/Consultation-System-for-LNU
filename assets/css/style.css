@@ -10,7 +10,7 @@ html, body {
   color: white; }
 
 .secondary-text {
-  color: #f5f5f5; }
+  color: #e74c3c; }
 
 .title {
   font-family: 'def-font'; }
@@ -67,11 +67,11 @@ html, body {
     background-color: #bf2718; }
 
 /* ============ INPUTS ============ */
-input, select, textarea {
+input, select {
   outline: none;
   border: 1px solid transparent !important;
   border-radius: 0px !important; }
-  input:focus, select:focus, textarea:focus {
+  input:focus, select:focus {
     border: 1px solid #3498db !important; }
 
 /* ============PAGE STRUCTURE / COMPONENTS ============ */
@@ -164,5 +164,38 @@ input, select, textarea {
 .primary-header {
   background-color: #f1f1f1;
   padding: 15px 10px; }
+
+ul.basic-container {
+  background-color: #f1f1f1;
+  border-radius: 4px;
+  list-style: none; }
+  ul.basic-container li {
+    margin: 0 auto;
+    padding: 20px; }
+
+.msg-box {
+  border: 1px solid #95a5a6;
+  border-radius: 4px;
+  padding: 1em; }
+  .msg-box textarea {
+    outline: none !important;
+    border: 0px !important;
+    box-shadow: none !important; }
+    .msg-box textarea:hover {
+      border: 0px !important;
+      box-shadow: none !important; }
+
+#msg-thread-box {
+  max-height: 250px;
+  background-color: #f1f1f1;
+  margin: 10px 0px;
+  overflow: auto;
+  padding: 10px; }
+
+.msg-single {
+  background-color: white;
+  padding: 10px;
+  border-radius: 40px;
+  margin: 20px !important; }
 
 /*# sourceMappingURL=style.css.map */

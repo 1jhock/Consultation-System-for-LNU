@@ -52,9 +52,10 @@
 				</div>
 
 				<div class="form-group">
-					<a href="create_acc_prof.php">Create account</a><button class="btn-prof-sm pull-right" type="submit"  name="prof_log" id="prof_log">Login</button>
+					<a href="create_acc_prof.php">Create account</a><button class="btn-prof-sm pull-right" type="submit"  name="prof_log" id="prof_log" >Login</button>
 				</div>
 			</form>
 		</div>
 	</div>
-</div>
+</div>	
+<input type="hidden" id="base-url" value="<?=base_url();?>" />

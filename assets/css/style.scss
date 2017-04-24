@@ -19,7 +19,7 @@ html, body {
 }
 
 .secondary-text {
-	color: #f5f5f5;
+	color: #e74c3c;
 }
 
 .title {
@@ -98,7 +98,7 @@ html, body {
 
 /* ============ INPUTS ============ */
 
-input, select, textarea {
+input, select {
 	outline: none;
 	border: 1px solid transparent !important;
 	border-radius: 0px !important;
@@ -239,3 +239,47 @@ input, select, textarea {
 	padding: 15px 10px;
 
 }
+
+ul.basic-container {
+	background-color: #f1f1f1;
+	border-radius: $border-radius;
+	list-style: none;
+
+	li {
+		margin: 0 auto;
+		padding: 20px;
+	}
+}
+
+
+.msg-box {
+	border: 1px solid #95a5a6;
+	border-radius: $border-radius;
+	padding: 1em;
+
+	textarea {
+		outline: none !important;
+		border: 0px !important;
+		box-shadow: none !important;
+		&:hover {
+			border: 0px !important;
+			box-shadow: none !important;
+		}
+	}
+}
+
+#msg-thread-box {
+	max-height: 250px;
+	background-color: #f1f1f1;
+	margin: 10px 0px;
+	overflow: auto;
+	padding: 10px;
+}
+
+.msg-single {
+	background-color: white;
+	padding: 10px;
+	border-radius: 40px;
+	margin: 20px !important;
+}
+
