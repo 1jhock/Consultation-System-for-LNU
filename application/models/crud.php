@@ -42,13 +42,13 @@ Class Crud extends CI_Model {
 		return $this->db->get()->num_rows();
 	}
 
-	function load_emoji($input_carrier) {
+	// function load_emoji($input_carrier) {
 
- 		$image_array = get_clickable_smileys(asset_url() . 'smileys/', $input_carrier); //input_carrier is hte inpnut where emojis are used.
-        $col_array = $this->table->make_columns($image_array, 8);
+ // 		$image_array = get_clickable_smileys(asset_url() . 'smileys/', $input_carrier); //input_carrier is hte inpnut where emojis are used.
+ //        $col_array = $this->table->make_columns($image_array, 8);
 
-        return  $this->table->generate($col_array);
-	}
+ //        return  $this->table->generate($col_array);
+	// }
 }
 
 ?>

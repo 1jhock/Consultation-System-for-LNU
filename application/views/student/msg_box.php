@@ -1,6 +1,6 @@
 <div class="container">
 	<h1 class="title">Message to Professor <?=$cur_prof->name?></h1>
-	<?php echo smiley_js(); ?>
+
 	<div id="msg-thread-box">
 		<i class="fa fa-spinner fa-spin fa-3x fa-fw spin center-block"></i>
 		<span class="sr-only">Loading...</span>
@@ -25,5 +25,4 @@
 
 	</div>
 
-	 <?php echo $smiley_table; ?>
 </div>

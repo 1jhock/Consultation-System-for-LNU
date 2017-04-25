@@ -54,8 +54,7 @@ Class Students extends CI_Controller {
 
 	function message($id) {
 		$data['cur_prof'] = $this->crud->get_single('professors','prof_id',$id);
-		$data['smiley_table'] = $this->crud->load_emoji('msg');
-
+	
 		$this->load->view('templates/header');
 		$this->load->view('student/msg_box', $data);
 		$this->load->view('templates/footer');
