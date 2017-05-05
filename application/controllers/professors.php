@@ -2,7 +2,7 @@
 /*
 	"_" prefix means not a page.
 */
-Class Students extends CI_Controller {
+Class Professors extends CI_Controller {
 
 	function index() {
 		$this->load->view('templates/header.php');
@@ -21,7 +21,7 @@ Class Students extends CI_Controller {
 			// Check if the credentials are not empty
 			if( !empty($username) || !empty($password) ) {
 				// Check if existing account
-				$user = $this->auth->login('students',trim($username),trim($password));
+				$user = $this->auth->login('professors',trim($username),trim($password));
 
 				// If existing
 				if( $user ) {
@@ -29,10 +29,9 @@ Class Students extends CI_Controller {
 
 					// Userdata
 					$data = [
-						'stud_id' => $user->stud_id,
+						'prof_id' => $user->prof_id,
 						'name' => $user->name,
-						'email' => $user->email,
-						'course' => $user->course,
+						
 					];
 
 					// Set session using useredata
@@ -42,7 +41,7 @@ Class Students extends CI_Controller {
 			
 			}
 
-			echo json_encode(['user' => $existing]);
+			echo json_encode(['prof' => $existing]);
 
 		}
 	
@@ -57,69 +56,50 @@ Class Students extends CI_Controller {
 
 
 	function home() {
-		// Get all the professors where department=student.course
-		$data['professors'] = $this->crud->get_specified('professors',['department'=> $this->session->userdata('course')]);
+		// Get all the list of existing students
+		$data['students'] = $this->crud->get_all('students');
 		
 
-
-		// GET the recent msg where sender is the user
-		$recent_msg = $this->crud->get_single('msg',['from_id'=> $this->session->userdata('stud_id')]);
-
-		// Determine the users
-		// Needed to get necessary data to load in view
-		$user1 = $recent_msg->from_id;
-		$user2 = $recent_msg->to_id;
-
-		// get info of the professor of the current message thread
-		$data['cur_prof'] = $this->crud->get_single('professors',['prof_id' => $user2]);
-
-		// Get the conversation_id
-		$data['conversation_data'] = $this->crud->get_single('conversation',"(user_1 = $user1 AND user_2 = $user2) OR (user_1= $user2 AND user_2 = $user1)");
-
 		$this->load->view('templates/header');
-		$this->load->view('student/index', $data);
+		$this->load->view('professor/index', $data);
 		$this->load->view('templates/footer');
-
 	}
 
-
-	/*AJAX REQUEST*/
-
-	function student_signup() {
-
+	function professor_signup() {
 		$data['courses'] = $this->crud->get_all('courses');
 
 		$this->load->view('templates/header');
-		$this->load->view('student/signup', $data);
+		$this->load->view('professor/signup', $data);
 		$this->load->view('templates/footer');
 	}
 
 
 	/*AJAX REQUEST*/
-	function add_student() {
+	function add_professor() {
 		$added = false; //Set added boolean 
 
 		// Inputs
 		$name = $this->input->post('name', true);
 		$email = $this->input->post('email', true);
-		$course = $this->input->post('course', true);
-		$username = $this->input->post('username', true);
+		$about = $this->input->post('about', true);
+		$department = $this->input->post('department', true);
 		$password = $this->input->post('pasword', true);
-
+		$username = $this->input->post('username', true);
 		// Check if any field is not empty
-		if(!empty($name) || !empty($email) || !empty($courses) || !empty($username) || !empty($password)) {
+		if(!empty($name) || !empty($email) || !empty($department) || !empty($username) || !empty($password) || !empty($about)) {
 			// Data
 			$data = [
 				'name' => trim($name),
 				'img' => 'default.png', //*default profile picture
 				'email' => trim($email),
-				'course' => trim($course),
-				'username' => trim($course),
+				'department' => trim($department),
+				'about' => trim($about),
+				'username' => trim($username),
 				'password' => trim(md5($password)) //I need to change this to *bcrypt
 			];
 
 			// Add to datbase
-			$new_data = $this->crud->add('students', $data);
+			$new_data = $this->crud->add('professors', $data);
 
 			// If added update the boolean
 			if( $new_data ) {
@@ -132,10 +112,10 @@ Class Students extends CI_Controller {
 
 	function message($id) {
 		// get the current professor where ID is $_GET['id']
-		$data['cur_prof'] = $this->crud->get_single('professors',['prof_id', $id]);
+		$data['cur_stud'] = $this->crud->get_single('students',['stud_id', $id]);
 		
 		/*USERS*/
-		$user1 = $this->session->userdata('stud_id'); //the student
+		$user1 = $this->session->userdata('prof_id'); //the student
 		$user2 = $id; //ID of teh professor
 
 		// GET all the conversation/s where user_1 and user_2 (vice-versa) exist
@@ -146,10 +126,10 @@ Class Students extends CI_Controller {
 			// SET it to another variable.
 			$data['conversation_data'] = $conversation_id;
 
-		// IF the conversation_id does not exist, create an ID for them.
+		// IF the conversation_is does not exist, create an ID for them.
 		} else {
 			$data = [
-				'user_1' => $this->session->userdata('stud_id'),
+				'user_1' => $this->session->userdata('prof_id'),
 				'user_2' => $id 
 			];
 			/*ADD new conversation*/
@@ -157,7 +137,7 @@ Class Students extends CI_Controller {
 		}
 
 		$this->load->view('templates/header');
-		$this->load->view('student/msg_box', $data);
+		$this->load->view('professor/msg_box', $data);
 		$this->load->view('templates/footer');
 	}
 
@@ -176,7 +156,7 @@ Class Students extends CI_Controller {
 			'conversation_id' => $conversation_id,
 			'msg' => trim($msg),
 			'status' => '0',
-			'from_id' => $this->session->userdata('stud_id'),
+			'from_id' => $this->session->userdata('prof_id'),
 			'to_id' =>  $to
 		];
 
@@ -207,12 +187,12 @@ Class Students extends CI_Controller {
 
 	function account($id) {
 		// Get the current account information
-		$data['infos'] =  $this->crud->get_single('students',['stud_id' => $id]);
-
+		$data['infos'] =  $this->crud->get_single('professors',['prof_id' => $id]);
 		// Ge Courses as dropdown
 		$data['courses'] = $this->crud->get_all('courses');
+		
 		$this->load->view('templates/header');
-		$this->load->view('student/account',$data);
+		$this->load->view('professor/account',$data);
 		$this->load->view('templates/footer');
 	}
 
@@ -352,29 +332,6 @@ Class Students extends CI_Controller {
 		$json = json_encode($get['profile_picture']);
 
 		echo $json;
-	}
-
-
-	function list_professor() {
-		// courses available
-		$courses = [
-			'ITs' => ['BSIT' => 1],
-			'CSs' => ['BSCS' => 2],
-			'BSEDs' =>['BSED' => 4],
-			'BEEDs' => ['BEED' => 3],
-			'CEs' => ['BSCE' => 8],
-			'BLISs' => ['BLIS' => 7]
-		];
-		// loop the assoc-arr
-		foreach($courses as $course => $course_info) {
-			foreach($course_info as $value => $id) {
-				$data[$course] = $this->crud->get_total_where('professors',['department', $id]);
-			}
-		}
-
-		$this->load->view('templates/header');
-		$this->load->view('student/professor_list', $data);
-		$this->load->view('templates/footer');
 	}
 
 

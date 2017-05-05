@@ -5,6 +5,8 @@ $border-radius: 4px;
 html, body {
 	padding: 0px;
 	margin: 0px auto;
+	overflow-x: hidden;
+	font-size: 13px !important;
 }
 
 /* ============FONT STYLES AND COLORS============ */
@@ -18,8 +20,27 @@ html, body {
 	color: white;
 }
 
-.secondary-text {
-	color: #e74c3c;
+/* BANNERS FOR INPUTS */
+.success {
+	color: white;
+	padding: 5px 10px;
+	border-radius: $border-radius;
+	background-color: #2ecc71;
+	margin: 6px 0px;
+}
+
+.error {
+	color: white;
+	padding: 5px 10px;
+	border-radius: $border-radius;
+	background-color: #e74c3c;
+	margin: 6px 0px;
+}
+// 
+
+.update {
+	color: #7f8c8d;
+	cursor: pointer;
 }
 
 .title {
@@ -44,6 +65,76 @@ html, body {
 	padding: 0px 10px;
 }
 
+// msg highlight heading
+.panel-container {
+	background-color: #f1f1f1;
+	border-radius:50px;
+	display: inline-block;
+	padding: 0px 25px;
+
+	
+	// font-size: 13px !important;
+	// color: black !important;
+	height: 35px;
+	display: flex;
+	align-items: center;
+	.msg-img {
+		height: 35px;
+		width: 35px;
+		border-radius: 50%;
+
+		margin: 0 10px 0 -25px;
+	}
+}
+
+.title-heading {
+	color: white;
+	background-color: #3498db;
+	padding: 10px 20px;
+	border-radius: $border-radius;
+}
+
+
+// FONT-AWESOME
+.fa {
+	padding: 7px;
+	border-radius: 50%;
+}
+.fa-envelope-o {
+	margin: 7px;
+	background: #FF4E50;  /* fallback for old browsers */
+	background: -webkit-linear-gradient(to right, #F9D423, #FF4E50);  /* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(to right, #F9D423, #FF4E50); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	color: white;
+}
+
+.fa-flag-o {
+	margin: 7px;
+	background: #D31027;  /* fallback for old browsers */
+	background: -webkit-linear-gradient(to right, #EA384D, #D31027);  /* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(to right, #EA384D, #D31027); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	color: white;
+}
+
+.fa-sticky-note-o {
+	margin: 7px;
+	padding: 7px 8px;
+	background: #00d2ff;  /* fallback for old browsers */
+	background: -webkit-linear-gradient(to right, #3a7bd5, #00d2ff);  /* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(to right, #3a7bd5, #00d2ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	color: white;
+}
+
+.fa-mortar-board {
+	margin: 7px;
+	padding: 8px 7px;
+	color: white;
+	background: #1CD8D2;  /* fallback for old browsers */
+	background: -webkit-linear-gradient(to right, #93EDC7, #1CD8D2);  /* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(to right, #93EDC7, #1CD8D2); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+
+}
 
 /* ============BUTTONS============ */
 
@@ -77,12 +168,18 @@ html, body {
 	padding: 4px 15px;
 	border-radius: 40px;
 	border: 0px;
+	cursor: pointer;
 	
 	&:hover {
 		background-color: darken($student-color,15%);
 	}
 }
 
+
+.btn-default {
+	border-radius: 40px !important;
+	padding: 4px 13px !important;
+}
 .btn-prof-sm {
 	outline: none;
 	color: white;
@@ -96,13 +193,29 @@ html, body {
 	}
 }
 
+
+.send-btn {
+	border: 1px solid #3498db;
+	padding: 4px 10px;
+	border-radius: $border-radius;
+	color: #3498db;
+	
+		&:hover {
+			 text-decoration: none;
+			 color: white;
+			 background-color:  #3498db;
+			 transition: background-color 0.3s ease-in;
+		}
+	
+}
+
 /* ============ INPUTS ============ */
 
 input, select {
 	outline: none;
-	border: 1px solid transparent !important;
+	border: 1px solid #3498db !important;
 	border-radius: 0px !important;
-
+	box-shadow: none !important;
 	&:focus {
 		border: 1px solid $student-color !important;
 	}
@@ -261,6 +374,8 @@ ul.basic-container {
 		outline: none !important;
 		border: 0px !important;
 		box-shadow: none !important;
+		overflow: hidden;
+
 		&:hover {
 			border: 0px !important;
 			box-shadow: none !important;
@@ -268,13 +383,14 @@ ul.basic-container {
 	}
 }
 
-#msg-thread-box {
-	max-height: 250px;
+#msg-thread-box{
+	max-height: 350px;
 	background-color: #f1f1f1;
 	margin: 10px 0px;
 	overflow: auto;
 	padding: 10px;
 }
+
 
 .msg-single {
 	background-color: white;
@@ -283,3 +399,52 @@ ul.basic-container {
 	margin: 20px !important;
 }
 
+.profile-picture {
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+}
+
+.course-container {
+	position: relative;
+	margin: 25px 0px;
+	color: white;
+	& a {
+		color: white;
+
+		&:hover {
+			color: white;
+			text-decoration: none;
+		}
+	}
+
+	&:hover .overlay{
+		opacity: 1;
+	}
+}
+
+.course-container {
+	display: block;
+}
+
+
+.overlay {
+	 position: absolute;
+	 top: 0;
+	 bottom: 0;
+	 left: 0;
+	 right: 0;
+	 width: 400px;
+	 opacity: 0;
+	 transition: .5s ease;
+	 background: rgba(44, 62, 80, 0.43);
+	 display: flex;
+	 justify-content: center;
+	 align-items: center;
+}
+
+.list-professors {
+	max-height: 400px;
+	overflow: auto;
+
+}

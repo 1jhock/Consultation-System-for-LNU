@@ -1,4 +1,6 @@
-<div id="home-page">
+<div class="row">
+	<div class="col-lg-12">
+		<div id="home-page">
 	<!-- HEADER -->
 	<div class="header">
 		<ul>
@@ -32,7 +34,7 @@
 				</div>
 				
 				<div class="form-group">
-					<a href="create_acc_student.php">Create account</a><button class="btn-student-sm pull-right" type="submit"  name="student_log" id="student_log">Login</button>
+					<a href="<?=base_url()?>students/student_signup">Create account</a><button class="btn-student-sm pull-right" type="submit"  name="student_log" id="student_log">Login</button>
 				</div>
 			</form>
 		</div>
@@ -52,10 +54,12 @@
 				</div>
 
 				<div class="form-group">
-					<a href="create_acc_prof.php">Create account</a><button class="btn-prof-sm pull-right" type="submit"  name="prof_log" id="prof_log" >Login</button>
+					<a href="<?=base_url()?>professors/professor_signup">Create account</a><button class="btn-prof-sm pull-right" type="submit"  name="prof_log" id="prof_log" >Login</button>
 				</div>
 			</form>
 		</div>
 	</div>
 </div>	
 <input type="hidden" id="base-url" value="<?=base_url();?>" />
+	</div>
+</div>
