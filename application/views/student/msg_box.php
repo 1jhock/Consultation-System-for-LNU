@@ -3,10 +3,10 @@
 	<div class="col-lg-12">
 		<div class="container">
 			<!--  -->
-			<div class="panel-container pull-right">
+			<span class="panel-container pull-right">
 				<img src="<?=asset_url()?>uploads/<?=$cur_prof->img?>" alt="" class="msg-img">
 				Professor <?=$cur_prof->name?>
-			</div> <br> <br>
+			</span> <br> <br>
 			<!--  -->
 			<div id="msg-thread-box">
 				<i class="fa fa-spinner fa-spin fa-3x fa-fw spin center-block"></i>

@@ -83,7 +83,7 @@ Class Professors extends CI_Controller {
 		$email = $this->input->post('email', true);
 		$about = $this->input->post('about', true);
 		$department = $this->input->post('department', true);
-		$password = $this->input->post('pasword', true);
+		$password = $this->input->post('password', true);
 		$username = $this->input->post('username', true);
 		// Check if any field is not empty
 		if(!empty($name) || !empty($email) || !empty($department) || !empty($username) || !empty($password) || !empty($about)) {

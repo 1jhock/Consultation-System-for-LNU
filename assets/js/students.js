@@ -94,10 +94,11 @@ $(document).ready(function(){
 			 url:  baseURL+'students/get_msg_thread/'+$('#conversation_id').val(), 
 			 success: function(data) {
 			 	if(data.length == 0) {
-			 		contents = '<h3 class="text-center">No Current Conversation</h3>';
+			 		contents = '<h3 class="text-center">Start your conversation now.</h3>';
 			 	} else {
 			 		$.each(data, function(index){
 			 		contents += "<small class='pull-right'> <time data-toggle='tooltip' data-placement='top' class='timeago' datetime='"+ data[index]['date_created'] +"'>"+  data[index]['date_created']+"</time></small> </br><div class='msg-single'>" + data[index]['msg'] + "</div>";
+			 		
 			 		});
 			 	
 			 	}
@@ -131,7 +132,10 @@ $(document).ready(function(){
 			 success: function(data) {
 			 	if( data.added ) {	
 			 	
-					 $('#banner-stud').html("<small class='success'><i class='fa fa-check-circle'></i>&nbsp; You have successfully created a new account. Please login to continue.</small>");
+					 $('#banner-stud').html("<small class='success'><i class='fa fa-check-circle'></i>&nbsp; You have successfully created a new account. Please login to continue.</small>").delay(3000);
+
+					 window.location.href = baseURL+'students/walkthrough';
+				
 				} else {
 					
 					 $('#banner-stud').html("<small class='error'><i class='fa fa-exclamation-circle'></i>&nbsp;Please provide necessary inputs to create an account.</small>");
@@ -143,6 +147,8 @@ $(document).ready(function(){
 		e.preventDefault();
 	});
 
+
+	
 
 	/*
 	UPDATES FOR STUDENTS, EACH FIELD ARE UPDATED INDIVIDUALLY
@@ -318,10 +324,38 @@ $(document).ready(function(){
 	var msgTxt = $('textarea#msg');
 
 	msgTxt.click(function() {
-		$('.panel-container').css({'backgroundColor':'#3498db','color':'white','font-size':'15px','transition':'all 0.5s ease-in'});
+	
+		$('.panel-container .msg-img').animate({'height':'40px','width':'40px'}, 500, function(){
+				$('.panel-container').css({'backgroundColor':'#2766a7','color':'white','font-size':'15px','transition':'all 0.5s ease-in'});
+		});
+
 	});
 
+	var walkItems =  [
+		'.walk-item .fa-envelope-open-o',
+		'.walk-item .fa-address-card-o',
+		'.walk-item .fa-comments-o',
+		'dummy'
+	];
 
+	var i = 0;
+	
+
+	function loadWalkthrough() {
+		$(walkItems[i]).animate({'font-size':'3em'});
+		$(walkItems[i-1]).animate({'font-size':'1em'}).delay(2000);
+		i++;
+
+		if(i  == walkItems.length) {
+			
+			i = 0;
+			
+		}
+
+
+	}
+
+	setInterval(loadWalkthrough, 2000);
 	
 });
 
