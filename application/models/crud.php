@@ -68,6 +68,8 @@ Class Crud extends CI_Model {
 	}
 
 
+
+
 	// function get_private_msgs($from, $to) {
 	// 	$this->db->query("SELECT * FROM msg uhm1 WHERE uhm1.msg_id=(
  //       SELECT msg_id FROM msg uhm2 

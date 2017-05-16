@@ -1,5 +1,6 @@
 $(document).ready(function(){
 	var baseURL = $('#base_url').val();
+	var assetURL = $('#asset_url').val();
 	/*
 	LOGIN FORMS IN HOMEPAGE
 	*/
@@ -302,7 +303,7 @@ $(document).ready(function(){
 	*/
 
 	 function reloadPic() {
-	 	var contents = "";
+	 	
 	 	  $.ajax({
 			 type: "GET",
 			 url:  baseURL+'students/get_profile_picture', 
@@ -318,15 +319,16 @@ $(document).ready(function(){
 
 
 
-	/*
+	/*=======================
 	ALL ABOUT UI/UX
-	*/
+	=========================*/
 	var msgTxt = $('textarea#msg');
 
 	msgTxt.click(function() {
 	
 		$('.panel-container .msg-img').animate({'height':'40px','width':'40px'}, 500, function(){
-				$('.panel-container').css({'backgroundColor':'#2766a7','color':'white','font-size':'15px','transition':'all 0.5s ease-in'});
+				$('.panel-container').css({'backgroundColor':'#2196f3','color':'white','font-size':'15px','transition':'all 0.5s ease-in'});
+				$(this).addClass('img-thumbnail');
 		});
 
 	});
@@ -356,6 +358,60 @@ $(document).ready(function(){
 	}
 
 	setInterval(loadWalkthrough, 2000);
+
+
+
+
+	/*Current Professor Profile FROM STUDENT-view*/
+	$('.show-profile').on('click',function(e){
+		var contents = "";
+		var schedulList = "";
+		 $.ajax({
+				 type: "GET",
+				 url: baseURL +'students/current_professor/'+ $(this).data('id'), 
+				 success: function(data) {
+
+				 	contents += "<img src='"+assetURL+"uploads/"+data.personal['img']+"' alt='Profile Picture' class='img-responsive img-circle center-block current-img'>";
+				 	contents += "<h1 class='text-center title'>"+data.personal['name']+"</h1>";
+				 	contents += "<p class='text-center secondary-text'>"+data.personal['about']+"</p>";
+				 	contents += "<small class='center-block'><a href='"+baseURL+"students/message/"+data.personal['prof_id']+"' class='send-btn'><i class='fa fa-comment-o'></i>&nbsp;Send Message</a></small><hr>";
+				 	contents += "<b>Department </b>" + data.personal['department'] + "</br>";
+				 	contents += "<b>Email Address </b>" + data.personal['email'] + "</br>";
+				 	contents += "<b>Conversations </b>   76";
+				 	contents += "<br><h2 class='title text-center'>Schedule</h2></br>";
+				 	contents += `<table class='table table-hover table-striped'>
+								<thead>
+									 <tr>
+										<th>Room</th>
+										<th>Time</th>
+									 </tr>
+									 <tbody id='load-sched'>
+										
+									 </tbody>
+								</thead>
+				 		 	</table>`;
+
+				 		var scheds = data.sched;
+				 		
+				 		 	$.each(scheds, function(index){
+				 			schedulList += `<tr>
+											<td>`+scheds[index]['room']+`</td>
+											<td>`+scheds[index]['from_time']+ ' '  + ' - ' + scheds[index]['to_time'] + ' '  +`</td>
+				 						</tr>`;
+				 			});
+				 		
+ 				 	
+					$('#modal-current-prof').html(contents);
+					$('#load-sched').html(schedulList);
+					$('#loading-current-prof').hide();
+				 }
+			});
+
+		e.preventDefault();
+	});
+
 	
 });
 
+
+	

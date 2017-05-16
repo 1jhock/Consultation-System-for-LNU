@@ -21,7 +21,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="<?=base_url()?>students/home">Student | Student Consultation System</a>
+      <a class="navbar-brand" href="<?=base_url()?>students/home" style="display: flex; align-items: center;"><img src="<?=asset_url()?>img/logo.png" alt="" style="height: 40px; width: auto">Student</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -51,7 +51,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="<?=base_url()?>professors/home">Professor | Student Consultation System</a>
+       <a class="navbar-brand" href="<?=base_url()?>professors/home" style="display: flex; align-items: center;"><img src="<?=asset_url()?>img/logo.png" alt="" style="height: 40px; width: auto">Professor</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->

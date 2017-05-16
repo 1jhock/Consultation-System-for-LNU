@@ -79,7 +79,7 @@ Class Students extends CI_Controller {
 
 		// Get all the professors where department=student.course
 		$data['professors'] = $this->crud->get_all('professors');
-		
+
 
 
 		// GET the recent msg where sender is the user
@@ -167,7 +167,7 @@ Class Students extends CI_Controller {
 
 	function walkthrough() {
 
-		if($this->session->userdata('stud_id') == FALSE ) {
+		if($this->session->userdata('stud_id') == TRUE ) {
 			redirect('students','refresh');
 		}
 
@@ -226,7 +226,7 @@ Class Students extends CI_Controller {
 
 
 		// get the current professor where ID is $_GET['id']
-		$data['cur_prof'] = $this->crud->get_single('professors',['prof_id'=> $id]);
+		$data['cur_prof'] = $this->crud->get_single('professors', ['prof_id' => $id]);
 
 		/*USERS*/
 		$user1 = $this->session->userdata('stud_id'); //the student
@@ -470,8 +470,8 @@ Class Students extends CI_Controller {
 			redirect('students','refresh');
 		}
 
-
 		header('Content-Type: application/json'); 
+	
 		$get['profile_picture'] = $this->crud->get_single('students', ['stud_id',$this->session->userdata('stud_id')]);
 
 		$json = json_encode($get['profile_picture']);
@@ -486,7 +486,7 @@ Class Students extends CI_Controller {
 			redirect('students','refresh');
 		}
 		// GET THE NUMBER OF PROFESSORS BY DEPT
-		// courses available
+		// courses available: Looping courses para scalable
 		$courses = [
 			'ITs' => ['BSIT' => 1],
 			'CSs' => ['BSCS' => 2],
@@ -498,15 +498,13 @@ Class Students extends CI_Controller {
 		// loop the assoc-arr
 		foreach($courses as $course => $course_info) {
 			foreach($course_info as $value => $id) {
-				$data[$course] = $this->crud->get_total_where('professors',['department'=>$id]);
-				$data['department'] = $this->crud->get_all('professors',['department' => $id]);
+				// get all total number of prof/department
+				$data[$course] = $this->crud->get_total_where('professors', ['department'=>$id]);
+				// get infos / course
+				$data[$course.'_link'] = $this->crud->get_single('courses', ['short_name' => $value]);
 			}
 		}
 
-		// GET THE TOTAL NUMBER OF CONV/DEPT
-
-		// GET THE ID OF EVERY DEPARTMENT
-		
 
 		$this->load->view('templates/header');
 		$this->load->view('student/professor_list', $data);
@@ -518,21 +516,37 @@ Class Students extends CI_Controller {
 			redirect('students','refresh');
 		}
 
+		$data['department'] = $this->crud->get_single('courses', ['course_id' => $department_id]);
+
+		$data['professors'] = $this->crud->get_specified('professors', ['department' => $department_id]);
+
 		$this->load->view('templates/header');
-		$this->load->view('student/professor_by_department');
+		$this->load->view('student/professors_by_department', $data);
 		$this->load->view('templates/footer');
 	}
 
+
+	/*AJAX Request*/
 	function current_professor($prof_id) {
 
-		if($this->session->userdata('stud_id') == FALSE ) {
-			redirect('students','refresh');
-		}
+		
+		// SET TIMEZONE
+		date_default_timezone_set('Asia/Kuala_Lumpur'); //for PHL
 
-		$this->load->view('templates/header');
-		$this->load->view('student/current_professor');
-		$this->load->view('templates/footer');
+		$current_day = date('N');
+
+		header('Content-Type: application/json'); 
+		
+		$data['schedules'] =  $this->schedule->get_schedules($prof_id, $current_day);
+		$data['cur_prof'] = $this->crud->get_single('professors', ['prof_id' => $prof_id]);
+		
+		$current = json_encode(["personal" => $data['cur_prof'], "sched" => $data['schedules']]);
+		
+		echo $current;
+		
 	}
+
+
 
 }
 

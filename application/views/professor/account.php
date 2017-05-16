@@ -10,8 +10,8 @@
 				<td><b>Name</b></td>
 				<td>
 					<?=$infos->name?>
-					<div id="banner-stud-name"></div>
-					<form action="" method="post" id="update_student_name">
+					<div id="banner-prof-name"></div>
+					<form action="" method="post" id="update_prof_name">
 						<div class="form-group">
 							<input type="text" class="form-control" id="name" name="name" placeholder="Type your new name" style="width: 250px !important">
 						</div>
@@ -27,8 +27,8 @@
 				<td><b>Username</b></td>
 				<td>
 						<?=$infos->username?> 
-						<div id="banner-stud-usrn"></div>
-						<form action="" method="post" id="update_student_username">
+						<div id="banner-prof-usrn"></div>
+						<form action="" method="post" id="update_prof_username">
 							<div class="form-group">
 								<input type="text" class="form-control" id="username" name="username" placeholder="Type your new username" style="width: 250px !important">
 							</div>
@@ -44,8 +44,8 @@
 				<td><b>Email Address</b></td>
 				<td>
 					<?=$infos->email?> 
-						<div id="banner-stud-email"></div>
-						<form action="" method="post" id="update_student_email">
+						<div id="banner-prof-email"></div>
+						<form action="" method="post" id="update_prof_email">
 							<div class="form-group">
 								<input type="text" class="form-control" id="email" name="email" placeholder="Type your new email" style="width: 250px !important">
 							</div>
@@ -61,24 +61,16 @@
 				<td><b>About</b></td>
 				<td>
 					<?=$infos->about?> 
-					<div id="banner-stud-course"></div>
-						<form action="" method="post" id="update_student_course">
+					<div id="banner-prof-about"></div>
+						<form action="" method="post" id="update_prof_about">
 							<div class="form-group">
-								
-								<label for="username">Select Course</label>
-								<select name="course" id="course" class="form-control" style="width: 250px !important">
-									<option value="1">BSIT</option>
-									<option value="2">BSED</option>
-									<option value="3">BEED</option>
-									<option value="4">BSTHRM</option>
-									<option value="4">BLISS</option>
-								</select>
+								<textarea class="form-control" name="about" id="about" placeholder="Tell something about yourself" cols="30" rows="3" style="width: 250px !important"></textarea>
 							</div>
 							<div class="form-group">
 								<button class="btn btn-default" type="submit"><i class="fa fa-pencil"></i>&nbsp;Change</button>
 							</div>
 						</form>
-					<small class="btn-student-sm pull-right" id="update_toggle_course">Update</small>
+					<small class="btn-student-sm pull-right" id="update_toggle_about">Update</small>
 				</td>
 			</tr>
 			<tr>
@@ -86,12 +78,12 @@
 				<td><b>Department</b></td>
 				<td>
 					<?=$infos->department?> 
-					<div id="banner-stud-course"></div>
-						<form action="" method="post" id="update_student_course">
+					<div id="banner-prof-dept"></div>
+						<form action="" method="post" id="update_prof_dept">
 							<div class="form-group">
 								
 								<label for="username">Select Department</label>
-								<select name="course" id="course" class="form-control" style="width: 250px !important">
+								<select name="department" id="department" class="form-control" style="width: 250px !important">
 									<?php foreach($courses as $course) :?>
 										<option value="<?=$course->course_id?>"><?=$course->short_name?></option>
 									<?php endforeach; ?>
@@ -101,16 +93,16 @@
 								<button class="btn btn-default" type="submit"><i class="fa fa-pencil"></i>&nbsp;Change</button>
 							</div>
 						</form>
-					<small class="btn-student-sm pull-right" id="update_toggle_course">Update</small>
+					<small class="btn-student-sm pull-right" id="update_toggle_dept">Update</small>
 				</td>
 			</tr>
 			<tr>
 				<td><b>Profile Picture</b></td>
 				<td>
-					<div id="banner-stud-profile"></div>
+					<div id="banner-prof-profile"></div>
 					<?php (isset($error) ? '<div class="error">'. $error .'</div>' : '') ?>
 					<?php (isset($success) ? '<div class="error">'. $success .'</div>' : '') ?>
-					<?php echo form_open_multipart('students/update_profile_pic');?>
+					<?php echo form_open_multipart('professors/update_profile_pic');?>
 						
 						<div class="form-group">
 							<input type="file" name="profile" id="profile" size="20" class="form-control" style="width: 250px !important"/>

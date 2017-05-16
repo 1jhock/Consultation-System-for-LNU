@@ -1,6 +1,15 @@
 <div class="row">
 	<div class="col-lg-12">
 		<div class="container">
+
+		<ol class="breadcrumb">
+			<li>
+				<a href="<?=base_url()?>students">Home</a>
+			</li>
+			
+			<li class="active">Account</li>
+		</ol>
+
 	<h4><i class="fa fa-id-card-o"></i>&nbsp;&nbsp;General Account Settings</h4>
 
 	<table class="table table-responsive table-hover">

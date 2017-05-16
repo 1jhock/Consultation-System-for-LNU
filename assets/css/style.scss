@@ -1,4 +1,4 @@
-$student-color: #3498db;
+$student-color: #2196f3;
 $prof-color: #e74c3c;
 $white-background: rgba(255, 255, 255, 0.53);
 $border-radius: 4px;
@@ -7,6 +7,7 @@ html, body {
 	margin: 0px auto;
 	overflow-x: hidden;
 	font-size: 13px !important;
+	background-color: #f1f1f1 !important;
 }
 
 /* ============FONT STYLES AND COLORS============ */
@@ -40,7 +41,7 @@ html, body {
 
 .update {
 	color: #7f8c8d;
-	cursor: pointer;
+	cursor: pointer; 
 }
 
 .secondary-text {
@@ -71,7 +72,7 @@ html, body {
 
 // msg highlight heading
 .panel-container {
-	background-color: #f1f1f1;
+	background-color: #e3f2fd;
 	border-radius:50px;
 	display: inline-block;
 	padding: 0px 25px;
@@ -91,7 +92,7 @@ html, body {
 	}
 }
 
-.title-heading {
+.title-heading { // need 2 delete
 	color: white;
 	background-color: #2766a7;
 	padding: 5px 7px 7px 8px;
@@ -179,11 +180,12 @@ html, body {
 	border-radius: 40px;
 	border: 0px;
 	cursor: pointer;
-	
+
 	&:hover {
 		background-color: darken($student-color,15%);
 	}
 }
+
 
 
 .btn-default {
@@ -206,15 +208,16 @@ html, body {
 
 .send-btn {
 	border: 1px solid #3498db;
+	background-color: $student-color;
 	padding: 4px 10px;
 	border-radius: $border-radius;
-	color: #3498db;
+	color: white;
 	
 		&:hover {
 			 text-decoration: none;
 			 color: white;
-			 background-color:  #3498db;
-			 transition: background-color 0.3s ease-in;
+			 background-color:  darken($student-color, 15%);
+			 
 		}
 	
 }
@@ -232,6 +235,28 @@ input, select {
 	}
 }
 
+/* =====================SCROLLBAR==================== */
+
+::-webkit-scrollbar {
+	width: 3px;
+	height: 7px;
+}
+::-webkit-scrollbar-track {
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radiuss: 10px;
+    background: rgba(180,180,180,0.8); 
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}
+::-webkit-scrollbar-thumb:window-inactive {
+	background: rgba(180,180,180,0.4); 
+}
+
+/* END */
 
 
 /* ============PAGE STRUCTURE / COMPONENTS ============ */
@@ -377,25 +402,29 @@ ul.basic-container {
 
 
 .msg-box {
-	border: 1px solid #95a5a6;
-	border-radius: $border-radius;
-	padding: 1em;
-
+	border: 1px solid rgba(158, 158, 158, 0.19);
+	border-radius: 40px;
+	padding: 0px 1em;
+	display: flex; 
+	align-items: center;
+	max-height: 50px;
+	background-color: white;
 	textarea {
 		outline: none !important;
 		border: 0px !important;
 		box-shadow: none !important;
 		overflow: hidden;
-
+		margin: 1em;
 		&:hover {
 			border: 0px !important;
 			box-shadow: none !important;
 		}
+		
 	}
 }
 
 #msg-thread-box{
-	max-height: 350px;
+	max-height: 250px;
 	background-color: #f1f1f1;
 	margin: 10px 0px;
 	overflow: auto;
@@ -456,10 +485,27 @@ ul.basic-container {
 	 align-items: center;
 }
 
-.list-professors {
-	max-height: 400px;
-	overflow: auto;
+.list-panel {
+	padding: 0px;
+	border-radius: $border-radius;
+	.list-heading {
+		margin: 0px;
+		background-color: #e3f2fd;
+		padding: 0px 10px;
+		border: 1px solid #bbdef8;
+		border-top-radius: $border-radius;
+	}
 
+	.list-body {
+		margin: 0px;
+		max-height: 400px;
+		overflow: auto;
+		background-color: white;
+		color: #607D8B;
+		padding: 20px 15px;
+		border: 1px solid rgba(158, 158, 158, 0.19);
+
+	}
 }
 
 .walkthrough {
@@ -497,4 +543,30 @@ ul.basic-container {
 			text-decoration: none;
 		}
 	}
+}
+
+.current-img {
+	margin: 3em;
+	height: 150px !important;
+	width: auto;
+	box-shadow: 0px 3px 15px #8c8c8c;
+	
+}
+#current-professor {
+	background-color: #f1f1f1;
+	padding: 1em 3em;
+	border-radius: $border-radius;
+	margin: 1em;
+	
+	&:hover {
+			box-shadow: 0px 1px 10px #8c8c8c;
+		}
+
+	.controls {
+		margin: 20px 10px;
+		padding: 10px;
+		border-top: 1px solid #7f8c8d;
+		border-bottom: 1px solid #7f8c8d;
+	}
+
 }
