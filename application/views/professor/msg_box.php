@@ -21,7 +21,7 @@
 				<!--  -->
 					<div class="list-body">
 					
-					<div id="msg-thread-box">
+					<div id="msg-thread-box-prof">
 						<i class="fa fa-refresh fa-spin fa-3x fa-fw spin center-block"></i>
 						<span class="sr-only">Loading...</span>
 					</div>

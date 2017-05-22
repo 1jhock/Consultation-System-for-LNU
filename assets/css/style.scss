@@ -95,7 +95,7 @@ html, body {
 .title-heading { // need 2 delete
 	color: white;
 	background-color: #2766a7;
-	padding: 5px 7px 7px 8px;
+	padding: 5	px 7px 7px 8px;
 	border-radius: $border-radius;
 	border: 1px solid #215080;
 }
@@ -107,9 +107,9 @@ html, body {
 }
 
 // FONT-AWESOME
-.fa {
+.fa-padding{
 	padding: 7px;
-	border-radius: 50%;
+
 }
 .fa-envelope-o {
 	margin: 7px;
@@ -176,11 +176,11 @@ html, body {
 	outline: none;
 	color: white;
 	background-color: $student-color;
-	padding: 4px 15px;
+	padding: 4px 15px !important;
 	border-radius: 40px;
 	border: 0px;
 	cursor: pointer;
-
+	
 	&:hover {
 		background-color: darken($student-color,15%);
 	}
@@ -212,7 +212,9 @@ html, body {
 	padding: 4px 10px;
 	border-radius: $border-radius;
 	color: white;
-	
+		.fa {
+			padding: 7px;
+		}
 		&:hover {
 			 text-decoration: none;
 			 color: white;
@@ -423,7 +425,7 @@ ul.basic-container {
 	}
 }
 
-#msg-thread-box{
+#msg-thread-box , #msg-thread-box-prof{
 	max-height: 250px;
 	background-color: #f1f1f1;
 	margin: 10px 0px;
@@ -569,4 +571,9 @@ ul.basic-container {
 		border-bottom: 1px solid #7f8c8d;
 	}
 
+}
+
+.modal-header {
+	background-color: #e3f2fd !important; 
+	border: 1px solid  #bbdef8;
 }

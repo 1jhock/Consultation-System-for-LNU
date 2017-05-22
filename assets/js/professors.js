@@ -90,7 +90,7 @@ var baseURL = $('#base_url').val();
 			 url:  baseURL+'professors/get_msg_thread/'+$('#conversation_id').val(), 
 			 success: function(data) {
 			 	if(data.length == 0) {
-			 		contents = '<h3 class="text-center">No Current Conversation</h3>';
+			 		contents = '<h3 class="text-center title">No Current Conversation</h3>';
 			 	} else {
 			 		$.each(data, function(index){
 			 		contents += "<small class='pull-right'> <time data-toggle='tooltip' data-placement='top' class='timeago' datetime='"+ data[index]['date_created'] +"'>"+  data[index]['date_created']+"</time></small> </br><div class='msg-single'>" + data[index]['msg'] + "</div>";
@@ -98,8 +98,8 @@ var baseURL = $('#base_url').val();
 			 	
 			 	}
 
-			 	 $('#msg-thread-box').html(contents);
-			 	 $('#msg-thread-box').scrollTop($("#msg-thread-box")[0].scrollHeight);
+			 	 $('#msg-thread-box-prof').html(contents);
+			 	 $('#msg-thread-box-prof').scrollTop($("#msg-thread-box-prof")[0].scrollHeight);
 			
 	 			 $('.spin').hide();
 			 	
@@ -351,7 +351,7 @@ var baseURL = $('#base_url').val();
 			 url:  baseURL+'professors/get_schedules', 
 			 success: function(data) {
 			 	if(data.length == 0) {
-			 		contents = '<p class="text-center no-error"><i class="fa fa-frown-o"></i>No Schedules</p>';
+			 		contents = '<div class="list-panel"><div class="list-body" style="height:300px; display: flex; align-items: center; justify-content: center;"><p class="text-center no-error"><i class="fa fa-frown-o"></i>&nbsp;&nbsp;No Schedules for today</p></div></div>';
 			 		$('#schedule-list').html(contents);
 			 	} else {
 			 		 $('#schedule-list').append(

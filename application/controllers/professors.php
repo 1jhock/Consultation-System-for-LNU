@@ -71,10 +71,10 @@ Class Professors extends CI_Controller {
 		}
 
 		// Get all the list of existing students
-		$data['students'] = $this->crud->get_all('students');
+		$data['students'] = $this->crud->get_specified('students', ['course' => $this->session->userdata('department')]);
 
 		// GET the recent msg where sender is the user
-		$recent_msg = $this->crud->get_single('msg',['from_id'=> $this->session->userdata('prof_id')]);
+		$recent_msg = $this->crud->get_single('msg', ['from_id'=> $this->session->userdata('prof_id')]);
 
 		if($recent_msg) {
 			// Determine the users

@@ -68,7 +68,7 @@ html, body {
 .title-heading {
   color: white;
   background-color: #2766a7;
-  padding: 5px 7px 7px 8px;
+  padding: 5	px 7px 7px 8px;
   border-radius: 4px;
   border: 1px solid #215080; }
 
@@ -77,9 +77,8 @@ html, body {
   padding: 10px 0px;
   text-align: center; }
 
-.fa {
-  padding: 7px;
-  border-radius: 50%; }
+.fa-padding {
+  padding: 7px; }
 
 .fa-envelope-o {
   margin: 7px;
@@ -144,7 +143,7 @@ html, body {
   outline: none;
   color: white;
   background-color: #2196f3;
-  padding: 4px 15px;
+  padding: 4px 15px !important;
   border-radius: 40px;
   border: 0px;
   cursor: pointer; }
@@ -171,6 +170,8 @@ html, body {
   padding: 4px 10px;
   border-radius: 4px;
   color: white; }
+  .send-btn .fa {
+    padding: 7px; }
   .send-btn:hover {
     text-decoration: none;
     color: white;
@@ -323,7 +324,7 @@ ul.basic-container {
       border: 0px !important;
       box-shadow: none !important; }
 
-#msg-thread-box {
+#msg-thread-box, #msg-thread-box-prof {
   max-height: 250px;
   background-color: #f1f1f1;
   margin: 10px 0px;
@@ -433,5 +434,9 @@ ul.basic-container {
     padding: 10px;
     border-top: 1px solid #7f8c8d;
     border-bottom: 1px solid #7f8c8d; }
+
+.modal-header {
+  background-color: #e3f2fd !important;
+  border: 1px solid  #bbdef8; }
 
 /*# sourceMappingURL=style.css.map */

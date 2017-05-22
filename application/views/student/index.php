@@ -1,12 +1,13 @@
 <div class="container-fluid">
-	<a href="<?=base_url()?>students/list_professor" class="btn btn-primary pull-right"><i class="fa fa-users"></i>&nbsp;See all Professors</a> <br> <br> <br>
+	<a href="<?=base_url()?>students/list_professor" class="btn btn-primary"><i class="fa fa-users"></i>&nbsp;See all Professors</a> <a href="#map-modal" data-toggle="modal" class="btn btn-primary"><i class="fa fa-map"></i>&nbsp;Show Map</a><br> <br> <br>
+	
 			<hr>
 	<div class="row">
 		<div class="col-lg-7">
 			<div class="list-panel">
 				<div class="list-heading">
-					<h4><i class="fa fa-comments-o"></i>Recent Conversation
-					<div class="panel-container pull-right "  style="font-size: 13px; color: black">
+					<h4 class="only-fa"><i class="fa fa-comments-o fa-padding"></i>Recent Conversation
+					<div class="panel-container pull-right"  style="font-size: 13px; color: black">
 						<?php if(empty($cur_prof)) :  ?>
 							No data
 						<?php else : ?>
@@ -45,7 +46,7 @@
 			
 			<!--  -->
 			<div class="list-panel">
-					<div class="list-heading"><h4><i class="fa fa-address-card-o"></i>Contact Professors</h4></div>
+					<div class="list-heading"><h4><i class="fa fa-address-card-o fa-padding"></i>Contact Professors</h4></div>
 					<div class="list-body">
 						<?php if(!empty($professors)) : ?>
 							<?php foreach($professors as $professor) :?>
@@ -56,7 +57,7 @@
 								    <div class="media-body">
 								    	<?php date_default_timezone_set('Asia/Kuala_Lumpur'); //for PHL ?>
 								      <h4 class="media-heading"><?=$professor->name?></h4>
-								      <span style="color: #e57373" data-toggle="tooltip" data-placement="right" title="Current Location based on Schedule"><i class="fa fa-map-marker"></i><?=$this->schedule->get_current_schedule(date('H:i:s'), $professor->prof_id, date('N')) ?></span>
+								      <span style="color: #e57373" data-toggle="tooltip" data-placement="right" title="Current Schedule"><i class="fa fa-map-marker"></i>&nbsp;<?=$this->schedule->get_current_schedule(date('H:i:s'), $professor->prof_id, date('N')) ?></span>
 								      <p><?=$professor->about?></p>
 								      <hr>
 								 		<p class="secondary-text"> <?=$professor->email?>
@@ -78,3 +79,28 @@
 		</div>
 	</div>
 </div>
+
+<!-- ==============================MODAL ================================= -->
+	
+<div class="modal fade" id="map-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-map-o"></i>&nbsp;&nbsp;Map of Leyte Normal University</h4>
+      </div>
+      <div class="modal-body">
+      	<div id="map" style="width: 565px; height: 400px"></div>
+      </div>
+     <div style="display: flex; padding: 20px 0px">
+     	 <button type="button" class="btn btn-sm btn-info" id="zoom" data-toggle="tooltip" data-placement="right" title="Toggle Free hand control"><i class="fa fa-search-plus" ></i>&nbsp;Free Hand</button>
+     	 <button type="button" class="btn btn-sm btn-info" id="show-school" data-toggle="tooltip" data-placement="right" title="View Universities around Tacloban City Area"><i class="fa fa-graduation-cap"></i>&nbsp;Universities in Area</button>
+     </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i>&nbsp;&nbsp;Close</button>
+      </div>
+    </div>
+  </div>	
+</div>
+
+<!-- ==============================end ========================================= -->

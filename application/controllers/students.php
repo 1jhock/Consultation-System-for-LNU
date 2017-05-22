@@ -78,7 +78,7 @@ Class Students extends CI_Controller {
 
 
 		// Get all the professors where department=student.course
-		$data['professors'] = $this->crud->get_all('professors');
+		$data['professors'] = $this->crud->get_specified('professors',['department' => $this->session->userdata('course')]);
 
 
 
@@ -545,6 +545,7 @@ Class Students extends CI_Controller {
 		echo $current;
 		
 	}
+
 
 
 
