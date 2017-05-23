@@ -60,7 +60,7 @@ Class Crud extends CI_Model {
 		$this->db->select()->from($table);
 		return $this->db->get()->num_rows();
 	}
-
+	
 	function get_total_where($table, $where) {
 		$this->db->select()->from($table);
 		$this->db->where($where);

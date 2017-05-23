@@ -2,7 +2,7 @@
 
 Class Auth extends CI_Model {
 
-	private function _check_existing($type, $value) {
+	function check_existing_user($type, $value) {
 		
 		switch($type) {
 			case 'username':
@@ -28,6 +28,8 @@ Class Auth extends CI_Model {
 		$query = $this->db->get();
 		return $query->first_row();
 	}
+
+	
 
 
 	function login($table, $username, $password) {
