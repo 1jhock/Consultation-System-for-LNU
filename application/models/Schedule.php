@@ -1,6 +1,6 @@
 <?php 
 
-Class schedule extends CI_Model {
+Class Schedule extends CI_Model {
 
 	function get_schedules($prof_id, $weekday) {
 		$query = $this->db->query("SELECT DATE_FORMAT(from_time, '%h:%i %p') as from_time,  DATE_FORMAT(to_time, '%h:%i %p') as to_time, room, prof_id, weekday FROM schedule where prof_id = $prof_id AND weekday = $weekday ORDER BY from_time ASC");
