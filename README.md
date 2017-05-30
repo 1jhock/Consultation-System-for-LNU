@@ -1,4 +1,4 @@
-# consultation
+# Consultation written in PHP CodeIgniter
 A one-way consultation system for Students and Professors in University
 
 ### Users Controller
