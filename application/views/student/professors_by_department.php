@@ -29,7 +29,7 @@
 							<td><img src="<?=asset_url()?>uploads/<?=$professor->img?>" alt="Profile Picture" class="img-circle" style="height: 30px; width: auto">&nbsp;&nbsp;<?=$professor->name?></td>
 							<td><?=$professor->email?></td>
 							<td><?=$professor->about?></td>
-							<td><a class="btn-student-sm show-profile" data-id="<?=$professor->prof_id?>" data-toggle="modal" href="#myModals">Show other info</a></td>
+							<td style="display: flex; align-items: center;"><a class="btn-student-sm show-profile" data-id="<?=$professor->prof_id?>" data-toggle="modal" href="#myModals">Show other info</a></td>
 						</tr>
 					<?php endforeach; ?>
 				</tbody>

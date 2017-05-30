@@ -23,11 +23,11 @@ $(document).ready(function(){
 		  fullscreenControl: true
 
 	 }
-
+	 
       function initMap() {
 
        	 	map = new google.maps.Map(document.getElementById('map'), mapOptions);
-			map.setCenter( {lat: 11.238106, lng: 125.001454});
+				map.setCenter( {lat: 11.238106, lng: 125.001454});
 
 			
 			// 3s after panning, the center autofocus -- LNU 
@@ -35,8 +35,7 @@ $(document).ready(function(){
 			    window.setTimeout(function() {
 			      map.panTo(LNUMap);
 			    }, 20000);
-		 	 });	
-
+		 	 });
       }
 	
 	var p;

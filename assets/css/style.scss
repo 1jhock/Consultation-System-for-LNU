@@ -111,41 +111,7 @@ html, body {
 	padding: 7px;
 
 }
-.fa-envelope-o {
-	margin: 7px;
-	background: #FF4E50;  /* fallback for old browsers */
-	background: -webkit-linear-gradient(to right, #F9D423, #FF4E50);  /* Chrome 10-25, Safari 5.1-6 */
-	background: linear-gradient(to right, #F9D423, #FF4E50); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-	color: white;
-}
 
-.fa-flag-o {
-	margin: 7px;
-	background: #D31027;  /* fallback for old browsers */
-	background: -webkit-linear-gradient(to right, #EA384D, #D31027);  /* Chrome 10-25, Safari 5.1-6 */
-	background: linear-gradient(to right, #EA384D, #D31027); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-	color: white;
-}
-
-.fa-sticky-note-o {
-	margin: 7px;
-	padding: 7px 8px;
-	background: #00d2ff;  /* fallback for old browsers */
-	background: -webkit-linear-gradient(to right, #3a7bd5, #00d2ff);  /* Chrome 10-25, Safari 5.1-6 */
-	background: linear-gradient(to right, #3a7bd5, #00d2ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-	color: white;
-}
-
-.fa-mortar-board {
-	margin: 7px;
-	padding: 8px 7px;
-	color: white;
-	background: #1CD8D2;  /* fallback for old browsers */
-	background: -webkit-linear-gradient(to right, #93EDC7, #1CD8D2);  /* Chrome 10-25, Safari 5.1-6 */
-	background: linear-gradient(to right, #93EDC7, #1CD8D2); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
-
-}
 
 /* ============BUTTONS============ */
 
@@ -172,7 +138,7 @@ html, body {
 }
 
 
-.btn-student-sm {
+.btn-student-sm{
 	outline: none;
 	color: white;
 	background-color: $student-color;
@@ -183,8 +149,16 @@ html, body {
 	
 	&:hover {
 		background-color: darken($student-color,15%);
+		text-decoration: none !important;
 	}
+
+	&:focus {
+		text-decoration: none !important;
+	}
+
 }
+
+
 
 
 
@@ -451,6 +425,7 @@ ul.basic-container {
 	position: relative;
 	margin: 50px 0px;
 	color: white;
+
 	& a {
 		color: white;
 
@@ -485,6 +460,8 @@ ul.basic-container {
 	 display: flex;
 	 justify-content: center;
 	 align-items: center;
+	 padding: 20px;
+	 border: 3px dashed white;
 }
 
 .list-panel {
@@ -496,6 +473,7 @@ ul.basic-container {
 		padding: 0px 10px;
 		border: 1px solid #bbdef8;
 		border-top-radius: $border-radius;
+
 	}
 
 	.list-body {
@@ -576,4 +554,12 @@ ul.basic-container {
 .modal-header {
 	background-color: #e3f2fd !important; 
 	border: 1px solid  #bbdef8;
+}
+
+
+/* for clearer table */
+
+td {
+	padding: 15px 10px !important;
+
 }

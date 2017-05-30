@@ -497,7 +497,7 @@ Class Professors extends CI_Controller {
 		header('Content-Type: application/json'); 
 		
 		$data['schedules'] =  $this->schedule->get_schedules($this->session->userdata('prof_id'), $current_day);
-
+		
 
 		
 		$json = json_encode($data['schedules']);

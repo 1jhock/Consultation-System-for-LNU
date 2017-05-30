@@ -371,7 +371,7 @@ var baseURL = $('#base_url').val();
 			 		 $.each(data, function(index){
 			 			contents += `<tr>
 										<td>`+data[index]['room']+`</td>
-										<td>`+data[index]['from_time']+ ' '  + ' - ' + data[index]['to_time'] + ' '  +`</td>
+										<td>`+data[index]['f_from_time']+ ' '  + ' - ' + data[index]['to_time'] + ' '  +`</td>
 			 						</tr>`;
 			 		});
 			 		

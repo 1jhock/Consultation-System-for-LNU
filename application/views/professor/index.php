@@ -5,7 +5,8 @@
 		<div class="col-lg-3">
 			<div class="list-panel">
 				<div class="list-heading">
-					<h4><i class="fa fa-id-badge fa-padding"></i>&nbsp;&nbsp;Students with Account</h4>
+					<h4 style="margin: 0px;"><i class="fa fa-id-badge fa-padding"></i>&nbsp;Students with Account</h4>
+					<p style="color: #97b2c6;">&nbsp;&nbsp;<?= $this->schedule->get_dept($this->session->userdata('department')) ?></p>
 				</div>
 				<div class="list-body">
 					<div class="list-msg">
@@ -18,11 +19,8 @@
 								    <div class="media-body">
 								    	<?php date_default_timezone_set('Asia/Kuala_Lumpur'); //for PHL ?>
 								      <h4 class="media-heading"><?=$student->name?></h4>
-								      
+								      <p class="secondary-text"> <?=$student->email?>
 								      <hr>
-								 		<p class="secondary-text"> <?=$student->email?>
-								      <?=$student->course?></p>
-								     
 								      <small><a href="<?=base_url()?>professors/message/<?=$student->stud_id?>" class='send-btn'><i class="fa fa-comment-o"></i>&nbsp;Send Message</a></small>
 								    </div>
 								  </div>

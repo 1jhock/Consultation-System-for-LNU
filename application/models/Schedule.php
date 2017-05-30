@@ -3,7 +3,7 @@
 Class Schedule extends CI_Model {
 
 	function get_schedules($prof_id, $weekday) {
-		$query = $this->db->query("SELECT DATE_FORMAT(from_time, '%h:%i %p') as from_time,  DATE_FORMAT(to_time, '%h:%i %p') as to_time, room, prof_id, weekday FROM schedule where prof_id = $prof_id AND weekday = $weekday ORDER BY from_time ASC");
+		$query = $this->db->query("SELECT DATE_FORMAT(from_time, '%h:%i %p') as f_from_time,  DATE_FORMAT(to_time, '%h:%i %p') as to_time, room, prof_id, weekday FROM schedule where prof_id = $prof_id AND weekday = $weekday ORDER BY from_time ASC");
 		/*Problem: Sort time*/
 		return $query->result();
 		
@@ -22,8 +22,16 @@ Class Schedule extends CI_Model {
 		$result = $this->db->query("SELECT room FROM schedule WHERE '$cur_time' BETWEEN from_time AND to_time AND prof_id='$prof_id' AND weekday='$weekday'");
 		$cur_room = $result->row();
 		return ( $result->num_rows() > 0 ) ? $cur_room->room  : 'VACANT';	
-		
 	}
+
+
+	// works on deprtmant(professor) && course(student)
+	function get_dept($dep_id) {	
+		$this->db->select()->from('courses')->where('course_id', $dep_id);
+		$dept = $this->db->get();
+		return $dept->row('full_name');
+	}
+
 
 
 

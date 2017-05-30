@@ -530,7 +530,7 @@ Class Students extends CI_Controller {
 	function current_professor($prof_id) {
 
 		
-		// SET TIMEZONE
+		// SET TIMEZONE for Schedule
 		date_default_timezone_set('Asia/Kuala_Lumpur'); //for PHL
 
 		$current_day = date('N');
@@ -540,7 +540,12 @@ Class Students extends CI_Controller {
 		$data['schedules'] =  $this->schedule->get_schedules($prof_id, $current_day);
 		$data['cur_prof'] = $this->crud->get_single('professors', ['prof_id' => $prof_id]);
 		
-		$current = json_encode(["personal" => $data['cur_prof'], "sched" => $data['schedules']]);
+		/*
+		Get the long-name-version of the department by accessing it using get_dept() as a standalone variable.
+		*/
+		$data['department'] = $this->schedule->get_dept($data['cur_prof']->department);
+
+		$current = json_encode(["personal" => $data['cur_prof'], "sched" => $data['schedules'], $data['department']]);
 		
 		echo $current;
 		

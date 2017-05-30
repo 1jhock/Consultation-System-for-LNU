@@ -4,10 +4,10 @@
 	<meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Students Consultation System</title>
-	<link rel="stylesheet" href="<?=asset_url()?>css/style.css">
-  <link rel="stylesheet" href="<?=asset_url()?>font-awesome-4.7.0/css/font-awesome.min.css">
-	<link rel="stylesheet" href="<?=asset_url()?>css/bootstrap.min.css">
-  <link rel="stylesheet" href="<?=asset_url()?>css/map.css">
+	<link rel="stylesheet" href="<?=asset_url()?>css/style.css" type="text/css">
+  <link rel="stylesheet" href="<?=asset_url()?>font-awesome-4.7.0/css/font-awesome.min.css" type="text/css">
+	<link rel="stylesheet" href="<?=asset_url()?>css/bootstrap.min.css" type="text/css">
+  <link rel="stylesheet" href="<?=asset_url()?>css/map.css" type="text/css">
 </head>
 <body>
 	

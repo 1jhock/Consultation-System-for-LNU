@@ -46,7 +46,9 @@
 			
 			<!--  -->
 			<div class="list-panel">
-					<div class="list-heading"><h4><i class="fa fa-address-card-o fa-padding"></i>Contact Professors</h4></div>
+					<div class="list-heading"><h4 style="margin: 0px;"><i class="fa fa-address-card-o fa-padding"></i>Contact Professors</h4>
+							<p style="color: #97b2c6;">&nbsp;&nbsp;<?= $this->schedule->get_dept($this->session->userdata('course')) ?></p>
+					</div>
 					<div class="list-body">
 						<?php if(!empty($professors)) : ?>
 							<?php foreach($professors as $professor) :?>
@@ -59,10 +61,8 @@
 								      <h4 class="media-heading"><?=$professor->name?></h4>
 								      <span style="color: #e57373" data-toggle="tooltip" data-placement="right" title="Current Schedule"><i class="fa fa-map-marker"></i>&nbsp;<?=$this->schedule->get_current_schedule(date('H:i:s'), $professor->prof_id, date('N')) ?></span>
 								      <p><?=$professor->about?></p>
+								      <p> <?=$professor->email?>
 								      <hr>
-								 		<p class="secondary-text"> <?=$professor->email?>
-								      <?=$professor->department?></p>
-								     
 								      <small><a href="<?=base_url()?>students/message/<?=$professor->prof_id?>" class='send-btn'><i class="fa fa-comment-o"></i>&nbsp;Send Message</a></small>
 								    </div>
 								  </div>
@@ -90,7 +90,7 @@
         <h4 class="modal-title" id="myModalLabel"><i class="fa fa-map-o"></i>&nbsp;&nbsp;Map of Leyte Normal University</h4>
       </div>
       <div class="modal-body">
-      	<div id="map" style="width: 565px; height: 400px"></div>
+      	<div id="map" style="width: 565px; height: 400px">Please connect to the internet to view the map.</div>
       </div>
      <div style="display: flex; padding: 20px 0px">
      	 <button type="button" class="btn btn-sm btn-info" id="zoom" data-toggle="tooltip" data-placement="right" title="Toggle Free hand control"><i class="fa fa-search-plus" ></i>&nbsp;Free Hand</button>

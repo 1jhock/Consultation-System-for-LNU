@@ -374,10 +374,15 @@ $(document).ready(function(){
 				 	contents += "<img src='"+assetURL+"uploads/"+data.personal['img']+"' alt='Profile Picture' class='img-responsive img-circle center-block current-img'>";
 				 	contents += "<h1 class='text-center title'>"+data.personal['name']+"</h1>";
 				 	contents += "<p class='text-center secondary-text'>"+data.personal['about']+"</p>";
-				 	contents += "<small class='center-block'><a href='"+baseURL+"students/message/"+data.personal['prof_id']+"' class='send-btn'><i class='fa fa-comment-o'></i>&nbsp;Send Message</a></small><hr>";
-				 	contents += "<b>Department </b>" + data.personal['department'] + "</br>";
-				 	contents += "<b>Email Address </b>" + data.personal['email'] + "</br>";
-				 	contents += "<b>Conversations </b>   76";
+				 	contents += "<small class='pull-right'><a href='"+baseURL+"students/message/"+data.personal['prof_id']+"' class='send-btn'><i class='fa fa-comment-o'></i>&nbsp;Send Message</a></small> <br /><br />";
+				 	contents += `<table class="table">
+								<tbody>`;
+					contents += "<tr><td>Department</td>";
+					contents += "<td>" + data[0] + "</td></tr>";
+					contents += "<tr><td>Email Address</td>"
+				 	contents += "<td>" + data.personal['email'] + "</td><tr/>";
+					contents += `</tbody>
+									</table>`;
 				 	contents += "<br><h2 class='title text-center'>Schedule</h2></br>";
 				 	contents += `<table class='table table-hover table-striped'>
 								<thead>
@@ -396,7 +401,7 @@ $(document).ready(function(){
 				 		 	$.each(scheds, function(index){
 				 			schedulList += `<tr>
 											<td>`+scheds[index]['room']+`</td>
-											<td>`+scheds[index]['from_time']+ ' '  + ' - ' + scheds[index]['to_time'] + ' '  +`</td>
+											<td>`+scheds[index]['f_from_time']+ ' '  + ' - ' + scheds[index]['to_time'] + ' '  +`</td>
 				 						</tr>`;
 				 			});
 				 		
