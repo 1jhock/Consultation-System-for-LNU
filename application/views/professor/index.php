@@ -36,7 +36,7 @@
 		</div>
 
 		<!--  -->
-		<div class="col-lg-6">
+		<div class="col-lg-5">
 			<div class="list-panel">
 				<div class="list-heading">
 					<h4><i class="fa fa-comments-o fa-padding"></i>Recent Conversation
@@ -69,25 +69,20 @@
 				</div>
 			</div>
 		</div>
+		<div class="col-lg-1"></div>
 		<!--  -->
 		<div class="col-lg-3">
-			<div class="row">
-				<div class="col-lg-6">
-					<h1 class="title">Schedule</h1>	
-				</div>
-				<div class="col-lg-6">
-					<br>
-					<br>
-					<?php date_default_timezone_set('Asia/Kuala_Lumpur') //for PHL  ?> 
-					<p class="text-right"><i class="fa fa-circle-o">&nbsp;&nbsp;</i><?= date('l') ?></p>
-				</div>
+			<div style="display: flex; justify-content: space-between;">
+				<?php date_default_timezone_set('Asia/Kuala_Lumpur') //for PHL  ?> 
+				<h5>Schedules for <?= date('l') ?></h5>
+				<h6><a data-toggle="modal" href="#schedule"><i class="fa fa-plus"></i>&nbsp;Add Schedule</a></h6>
 			</div>
-
+			
 			<div class="list-body" id='schedule-list'>
 				<i class="fa fa-refresh fa-spin fa-3x fa-fw center-block loading-sched" aria-hidden="true"></i>
 			</div>
-			<br>
-			<p class="text-right" style="font-size: 13px; color: black"><a data-toggle="modal" href="#schedule"><i class="fa fa-plus"></i>&nbsp;&nbsp;Add Schedule</a></p>
+			
+			
 		</div>
 	</div>	
 </div>
@@ -104,7 +99,7 @@
       <div class="modal-body">
       	<form action="" method="post" id="new-schedule">
       		<div class="form-group">
-      			<label for="week">Select Week</label>
+      			<label for="week"><i class="fa fa-check-circle"></i>&nbsp;Select Week</label>
       			<select name="week" id="week" class="form-control">
       				<option value="1">Monday</option>
       				<option value="2">Tuesday</option>
@@ -116,29 +111,21 @@
       			</select>
       		</div>
       		<div class="form-group">
-      			<label for="from_time">From</label>
+      			
       			<div class="row">
       				<div class="col-lg-6">
+      					<label for="from_time"><i class="fa fa-clock-o"></i>&nbsp;From</label>
       					<input type="time" id="from_time" name="from_time" class="form-control">
       				</div>
       				<div class="col-lg-6">
-      					
-      				</div>
-      			</div>
-      		</div>
-      		<div class="form-group">
-      			<label for="to_time">To</label>
-      			<div class="row">
-      				<div class="col-lg-6">
+      					<label for="to_time"><i class="fa fa-clock-o"></i>&nbsp;To</label>
       					<input type="time" id="to_time" name="to_time" class="form-control">
       				</div>
-      				<div class="col-lg-6">
-      					
-      				</div>
       			</div>
       		</div>
+
       		<div class="form-group">
-      			<label for="room">Room</label>
+      			<label for="room"><i class="fa fa-building-o"></i>&nbsp;Room</label>
       			<input type="text" class="form-control" id="room" name="room">
       		</div>
       		 <div class="modal-footer">

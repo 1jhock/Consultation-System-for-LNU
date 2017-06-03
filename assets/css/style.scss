@@ -495,9 +495,7 @@ ul.basic-container {
 	width: 100vw;
 	color: white;
 	display: flex;
-	justify-content: center;
-	align-items: center;
-		
+	flex-direction: column;
 
 	.walk-item h1{
 		font-size: 5em;

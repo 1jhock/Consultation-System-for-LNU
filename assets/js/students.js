@@ -1,33 +1,40 @@
 $(document).ready(function(){
 	var baseURL = $('#base_url').val();
 	var assetURL = $('#asset_url').val();
-	/*
-	LOGIN FORMS IN HOMEPAGE
-	*/
-	var studLogin = $('#student-login');
-	var profLogin = $('#professor-login');
-	var studBtn = $('#stud-btn');
-	var profBtn =  $('#prof-btn');
-
-	studLogin.hide();
-	profLogin.hide();
 	
-	studBtn.click(function(){
-		studLogin.fadeIn();
-		profLogin.hide();
-		$(this).addClass('active');
-		$(profBtn).removeClass('active');
+	/*===================================================
+	LOGIN FORMS IN HOMEPAGE
+	=====================================================*/
+	(function(){
+		
+		var studLogin = $('#student-login');
+		var profLogin = $('#professor-login');
+		var studBtn = $('#stud-btn');
+		var profBtn =  $('#prof-btn');
 
-	});
-
-	profBtn.click(function(){
 		studLogin.hide();
-		profLogin.fadeIn();
-		$(this).addClass('active');
-		$(studBtn).removeClass('active');
-	});
+		profLogin.hide();
 
 
+		/*
+		activeBtn    => currentBtn that is clicked
+		activeLogin  => showed login div
+		dActiveBtn   => !clicked btn
+		dActiveLogin => hidden login
+		*/
+		function showlogin(activeBtn, activeLogin, dActiveBtn, dActiveLogin) {
+			activeBtn.click(function(){
+				dActiveLogin.hide();
+				activeLogin.fadeIn();
+				$(this).addClass('active');
+				$(dActiveBtn).removeClass('active');
+			});
+		}
+
+		showlogin(studBtn, studLogin, profBtn, profLogin);
+		showlogin(profBtn, profLogin, studBtn, studLogin);
+
+	}());
 
 
 	/*
@@ -151,50 +158,44 @@ $(document).ready(function(){
 
 	
 
-	/*
-	UPDATES FOR STUDENTS, EACH FIELD ARE UPDATED INDIVIDUALLY
-	*/
+	/*===================================================================
+	UPDATES FOR STUDENTS/PROFESSORS, EACH FIELD ARE UPDATED INDIVIDUALLY
+	=====================================================================*/
 
+	(function(){
 
-	// TOGGLE BUTTONS 
-	var updateNameBtn  = $('#update_toggle_name');
-	var updateUsrNamBtn = $('#update_toggle_username');
-	var updateEmailBTn = $('#update_toggle_email');
-	var updateCourseBtn = $('#update_toggle_course');
+	var studentUpdateBtn = {
+		updateNameBtn: $('#update_toggle_name'),
+		updateUsrNamBtn: $('#update_toggle_username'),
+		updateEmailBTn: $('#update_toggle_email'),
+		updateCourseBtn: $('#update_toggle_course'),
+	}
+
+	var studentUpdateForm = {
+		nameForm: $('#update_student_name'),
+		usernForm: $('#update_student_username'),
+		emailForm: $('#update_student_email'),
+		courseForm: $('#update_student_course')
+	} 
+
+	function showUpdateForm(form, btnTrigger) {
+		form.hide()
+
+		btnTrigger.click(function(){
+			form.slideToggle();
+		});
+	}
 
 	// TOGGLE FOR NAME FIELD
-	var nameForm = $('#update_student_name');
-
-	nameForm.hide()
-	updateNameBtn.click(function(){
-		nameForm.slideToggle();
-	});
-
+	showUpdateForm(studentUpdateForm.nameForm, studentUpdateBtn.updateNameBtn);
 	// TOGGLE FOR USERNAME FIELD
-	var usernForm = $('#update_student_username');
-
-	usernForm.hide();
-	updateUsrNamBtn.click(function(){
-		usernForm.slideToggle();
-	});
-
+	showUpdateForm(studentUpdateForm.usernForm, studentUpdateBtn.updateUsrNamBtn);
 	// TOGGLE FOR EMAIL FIELD
-	var emailForm = $('#update_student_email');
-
-	emailForm.hide();
-	updateEmailBTn.click(function(){
-		emailForm.slideToggle();
-	});	
-
+	showUpdateForm(studentUpdateForm.emailForm, studentUpdateBtn.updateEmailBTn);
 	// TOGGLE FOR COURSE FIELD
-	var courseForm = $('#update_student_course');
+	showUpdateForm(studentUpdateForm.courseForm, studentUpdateBtn.updateCourseBtn);
 
-	courseForm.hide();
-	updateCourseBtn.click(function(){
-		courseForm.slideToggle();
-	});
-
-	
+	}());
 
 
 	/*
