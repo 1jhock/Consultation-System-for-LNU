@@ -32,6 +32,7 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="" alt="Profile Picture" class="profile-picture" id="profile-picture">&nbsp;<?=$this->session->userdata('name')?>&nbsp;<span class="caret"></span></a>
           <ul class="dropdown-menu">
+   
             <li><a href="<?=base_url()?>students/account/<?=$this->session->userdata('stud_id')?>"><i class="fa fa-wrench"></i>&nbsp;Account</a></li>
              <li role="separator" class="divider"></li>
             <li><a href="<?=base_url()?>students/logout"><i class="fa fa-sign-out"></i>&nbsp;Logout</a></li>

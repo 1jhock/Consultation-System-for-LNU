@@ -11,6 +11,7 @@ $(document).ready(function(){
 	 			]
 	 		}
 	 ];
+
 	 var LNUMap = {lat: 11.238106, lng: 125.001454};
 	 var mapOptions = {
 	 	  center: LNUMap,
@@ -37,7 +38,8 @@ $(document).ready(function(){
 			    }, 20000);
 		 	 });
       }
-	
+
+	/*==== Controls ====*/
 	var p;
 	function defaultZoom() {
 		map.setOptions({ maxZoom: 18, minZoom: 18});
@@ -130,7 +132,7 @@ $(document).ready(function(){
 
 	}
 
-	google.maps.event.addDomListener(window, 'load', initMap()); //load map
+
 
 
 
@@ -299,6 +301,6 @@ $(document).ready(function(){
 
 
    
-     
+     google.maps.event.addDomListener(window, 'load', initMap()); //load map
 
 });

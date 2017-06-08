@@ -108,8 +108,10 @@ var baseURL = $('#base_url').val();
 	 };
 	 		
 	
-	 reloadMsgProf();
-
+	
+	 $("#conversation").on("shown.bs.modal", function() {
+	     reloadMsgProf();
+	});
 	 /*
 	RELOAD Profile Picture fro database
 	*/
@@ -130,61 +132,7 @@ var baseURL = $('#base_url').val();
 	reloadPicProf();
 
 
-	// TOGGLE FOR DEPARTMENT FIELD
-	var deptForm = $('#update_prof_dept');
-	var updateDeptBtn = $('#update_toggle_dept');
-	deptForm.hide();
-	updateDeptBtn.click(function(){
-		deptForm.slideToggle();
-	});
-
-	// TOGGLE FOR ABOUT FIELD
-	var aboutForm = $('#update_prof_about');
-	var updateAboutBtn = $('#update_toggle_about');
-	aboutForm.hide();
-	updateAboutBtn.click(function(){
-		aboutForm.slideToggle();
-	});
-
-
-	// TOGGLE BUTTONS 
-	var updateNameBtn  = $('#update_toggle_name');
-	var updateUsrNamBtn = $('#update_toggle_username');
-	var updateEmailBTn = $('#update_toggle_email');
-	var updateCourseBtn = $('#update_toggle_course');
-
-	// TOGGLE FOR NAME FIELD
-	var nameForm = $('#update_prof_name');
-
-	nameForm.hide()
-	updateNameBtn.click(function(){
-		nameForm.slideToggle();
-	});
-
-	// TOGGLE FOR USERNAME FIELD
-	var usernForm = $('#update_prof_username');
-
-	usernForm.hide();
-	updateUsrNamBtn.click(function(){
-		usernForm.slideToggle();
-	});
-
-	// TOGGLE FOR EMAIL FIELD
-	var emailForm = $('#update_prof_email');
-
-	emailForm.hide();
-	updateEmailBTn.click(function(){
-		emailForm.slideToggle();
-	});	
-
-	// TOGGLE FOR COURSE FIELD
-	var courseForm = $('#update_prof_course');
-
-	courseForm.hide();
-	updateCourseBtn.click(function(){
-		courseForm.slideToggle();
-	});
-
+	
 
 	/*=====UPDATING CREDS=======*/
 
@@ -343,8 +291,9 @@ var baseURL = $('#base_url').val();
 	});
 
 
-	 /*LOAD SCHEDULES*/
-	 function loadSchedules() {
+	 /*====================== LOAD SCHEDULES =======================*/
+	(function(){
+		 function loadSchedules() {
 	 	 var contents = "";
 	 	  $.ajax({
 			 type: "GET",
@@ -386,5 +335,31 @@ var baseURL = $('#base_url').val();
 	 };
 	 		
 	 loadSchedules();
+	}());
+
+	/*====================== Search Requests ====================*/
+	 (function(){
+
+	 	let searchContainer = $('#search-results');
+
+	 	$('#search-student').keyup(function(){
+	 		$.ajax({
+				 type: "GET",
+				 url:  baseURL+'professors/get_search_result/'+$('#search-student').val(), 
+				 success: function(data) {
+				 	if( data ) {
+				 		searchContainer.html(`
+								<h4><a href="">`+data[0].name+`</a></h4> <br />
+								<small>`+data[0].course+`</small>
+				 			`);
+				 	} else {
+				 		searchContainer.html('nope');
+				 	}
+				 }
+	 		});
+
+	 	});
+
+	 }());
 
 });

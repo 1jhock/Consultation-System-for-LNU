@@ -1,6 +1,26 @@
 <div class="container-fluid">
-	<a href="<?=base_url()?>students/list_professor" class="btn btn-primary pull-right"><i class="fa fa-users"></i>&nbsp;See all Students</a> <br> <br> <br>
-	<hr>
+	<div class="row">
+		<div class="col-lg-8">
+				<div class="row" id="search-container">
+					<div class="col-lg-11">
+						<input type="search" name="search_student" id="search-student" placeholder="Search a Student or Courses" class="form-control">	
+					</div>
+					<div class="col-lg-1">
+						<button id="search-btn"><i class="fa fa-search"></i></button>
+					</div>
+				</div>
+
+				<div id="search-results"></div>
+		</div>
+		<div class="col-lg-4">
+			<a href="#conversation" class="btn btn-primary pull-right" data-toggle="modal"><i class="fa fa-users"></i>&nbsp;Recent Conversation</a> <br> <br> <br>
+		</div>
+	</div>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
 	<div class="row">
 		<div class="col-lg-3">
 			<div class="list-panel">
@@ -36,7 +56,7 @@
 		</div>
 
 		<!--  -->
-		<div class="col-lg-5">
+	<!-- 	<div class="col-lg-5">
 			<div class="list-panel">
 				<div class="list-heading">
 					<h4><i class="fa fa-comments-o fa-padding"></i>Recent Conversation
@@ -68,14 +88,14 @@
 					<?php endif; ?>
 				</div>
 			</div>
-		</div>
+		</div> -->
 		<div class="col-lg-1"></div>
 		<!--  -->
 		<div class="col-lg-3">
 			<div style="display: flex; justify-content: space-between;">
 				<?php date_default_timezone_set('Asia/Kuala_Lumpur') //for PHL  ?> 
-				<h5>Schedules for <?= date('l') ?></h5>
-				<h6><a data-toggle="modal" href="#schedule"><i class="fa fa-plus"></i>&nbsp;Add Schedule</a></h6>
+				<h5 id="sched-title"><i class="fa fa-calendar"></i>&nbsp;Schedules for <?= date('l') ?></h5>
+				<h6 style="display: flex; flex-direction: column; align-self: flex-end;"><a data-toggle="modal" href="#schedule"><i class="fa fa-plus"></i>&nbsp;Add Schedule</a></h6>
 			</div>
 			
 			<div class="list-body" id='schedule-list'>
@@ -87,7 +107,7 @@
 	</div>	
 </div>
 
-<!-- ==============================MODAL ================================= -->
+<!-- ============================== MODAL for adding Schedule ================================= -->
 	
 <div class="modal fade" id="schedule" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
@@ -132,6 +152,54 @@
       		 	<button class="btn-student-sm pull-right" type="submit"><i class="fa fa-plus"></i>&nbsp;&nbsp;Add</button>
 		      </div>
       	</form>
+      </div>
+    </div>
+  </div>	
+</div>
+
+<!-- ==============================end ========================================= -->
+
+<!-- ============================== MODAL for Recent Conversation ================================= -->
+	
+<div class="modal fade" id="conversation" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-comments-o fa-padding"></i>Recent Conversation
+		
+		</h4>&nbsp;<small id="sched-banner"></small>
+      </div>
+      <div class="modal-body">
+      			<div class="list-panel">
+			
+					<span class="panel-container pull-right"  style="font-size: 13px; color: black;">
+						<?php if(empty($cur_stud)) :  ?>
+							No Data
+						<?php else : ?>
+							<img src="<?=asset_url()?>uploads/<?=$cur_stud->img?>" alt="" class="msg-img">
+						<?=$cur_stud->name?>
+						<?php endif; ?>
+					</span>
+					<br><br>
+				<div class="list-body">
+					<?php if(empty($conversation_data)) : ?>
+						<div class="no-result"><i class="fa fa-frown-o"></i>No recent conversation</div>
+					<?php else : ?>
+					<div id="msg-thread-box-prof">
+						<i class="fa fa-refresh fa-spin fa-3x fa-fw spin center-block"></i>
+						
+					</div>
+					
+						<form action="" method="post" id="send-msg-prof" class="msg-box">
+							<input type="hidden" id="to_id" name="to_id" value="<?=$cur_stud->stud_id?>">
+							<input type="hidden" id="conversation_id" name="conversation_id" value="<?=$conversation_data->conversation_id?>">
+							<textarea name="msg" id="msg" cols="50" rows="1" class="form-control" placeholder="Type your message here..."></textarea>
+							<button type="submit"  class="pull-right btn-student-sm" id="send-msg">Send</button>
+						</form>
+					<?php endif; ?>
+				</div>
+			</div>
       </div>
     </div>
   </div>	

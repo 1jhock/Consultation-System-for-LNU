@@ -69,7 +69,7 @@
 				<!-- COURSE -->
 				<td><b>Course</b></td>
 				<td>
-					<?=$infos->course?> 
+					<?=$this->schedule->get_dept($infos->course)?> 
 					<div id="banner-stud-course"></div>
 						<form action="" method="post" id="update_student_course">
 							<div class="form-group">

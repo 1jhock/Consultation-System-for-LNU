@@ -37,9 +37,7 @@ $(document).ready(function(){
 	}());
 
 
-	/*
-	LOGIN FOR STUDENT
-	*/
+	/*========================= LOGIN FOR STUDENT =========================*/
 	  $("#student_log").on('submit',function(e) {
 		
 		 var creds = $(this).serialize();
@@ -68,9 +66,7 @@ $(document).ready(function(){
 
 	 
 
-	   /*
-		SEND MESSAGE FROM STUDENT
-	   */
+	   /*========================== SEND MESSAGE FROM STUDENT ==========================*/
 	  $("#send-msg").on('submit',function(e) {
 		
 		 var creds = $(this).serialize();
@@ -82,7 +78,7 @@ $(document).ready(function(){
 			 data: creds,
 			 success: function(data) {
 			
-			 		$('textarea#msg').text("").focus();
+			 		$('textarea#msg').val("").focus();
 			 		
 			 		 setInterval(reloadMsgStud(), 5000);
 			 }
@@ -92,9 +88,7 @@ $(document).ready(function(){
 
 	
 
-	  /*
-	  GET MESSAGES FROM DB
-	  */
+	  /*======================== GET MESSAGES FROM DB ================================*/
 	 function reloadMsgStud() {
 	 	var contents = "";
 	 	  $.ajax({
@@ -105,16 +99,14 @@ $(document).ready(function(){
 			 		contents = '<h3 class="text-center">Start your conversation now.</h3>';
 			 	} else {
 			 		$.each(data, function(index){
-			 		contents += "<small class='pull-right'> <time data-toggle='tooltip' data-placement='top' class='timeago' datetime='"+ data[index]['date_created'] +"'>"+  data[index]['date_created']+"</time></small> </br><div class='msg-single'>" + data[index]['msg'] + "</div>";
+			 		contents += "<small class='pull-right'> <time data-toggle='tooltip' data-placement='top' class='timeago' datetime='"+ data[index]['date_created'] +"'>"+  data[index]['date_created']+"</time></small> </br><div class='msg-single' >" + data[index]['msg'] + "</div>";
 			 		
 			 		});
 			 	
 			 	}
-
+			 	 $('.spin').hide();
 			 	 $('#msg-thread-box').html(contents);
 			 	 $('#msg-thread-box').scrollTop($("#msg-thread-box")[0].scrollHeight);
-			
-	 			 $('.spin').hide();
 			 	
 			 }
 		});
@@ -125,9 +117,7 @@ $(document).ready(function(){
 	setTimeout(reloadMsgStud(), 5000);
 
 
-	/*
-	SIGNUP FOR STUDENTS
-	*/
+	/*===================================== SIGNUP FOR STUDENTS ===============================*/
 	$('#signup_stud').on('submit', function(e) {
 
 		var creds = $(this).serialize();
@@ -136,6 +126,7 @@ $(document).ready(function(){
 			 type: "POST",
 			 url:  baseURL+'students/add_student',
 			 dataType: 'json',
+
 			 data: creds,
 			 success: function(data) {
 			 	if( data.added ) {	
@@ -164,6 +155,7 @@ $(document).ready(function(){
 
 	(function(){
 
+	/*=============== Student =============*/
 	var studentUpdateBtn = {
 		updateNameBtn: $('#update_toggle_name'),
 		updateUsrNamBtn: $('#update_toggle_username'),
@@ -178,8 +170,29 @@ $(document).ready(function(){
 		courseForm: $('#update_student_course')
 	} 
 
+	/*============== Professor ==============*/
+	var profUpdateBtn = {
+		updateDeptBtn: $('#update_toggle_dept'),
+		updateAboutBtn: $('#update_toggle_about'),
+		updateNameBtn: $('#update_toggle_name'),
+		updateUsrNamBtn: $('#update_toggle_username'),
+		updateEmailBTn: $('#update_toggle_email')
+		
+	}
+
+	var profUpdateForm = {
+		deptForm: $('#update_prof_dept'),
+		aboutForm: $('#update_prof_about'),
+		nameForm: $('#update_prof_name'),
+		usernForm: $('#update_prof_username'),
+		emailForm: $('#update_prof_email')
+		
+	}
+
+	/*============== Toggle UpdateForm Function ==========*/
+
 	function showUpdateForm(form, btnTrigger) {
-		form.hide()
+		form.hide();
 
 		btnTrigger.click(function(){
 			form.slideToggle();
@@ -188,16 +201,24 @@ $(document).ready(function(){
 
 	// TOGGLE FOR NAME FIELD
 	showUpdateForm(studentUpdateForm.nameForm, studentUpdateBtn.updateNameBtn);
+	showUpdateForm(profUpdateForm.nameForm, profUpdateBtn.updateNameBtn);
+
 	// TOGGLE FOR USERNAME FIELD
 	showUpdateForm(studentUpdateForm.usernForm, studentUpdateBtn.updateUsrNamBtn);
+	showUpdateForm(profUpdateForm.usernForm, profUpdateBtn.updateUsrNamBtn);
+
 	// TOGGLE FOR EMAIL FIELD
 	showUpdateForm(studentUpdateForm.emailForm, studentUpdateBtn.updateEmailBTn);
+	showUpdateForm(profUpdateForm.emailForm, profUpdateBtn.updateEmailBTn);
+
 	// TOGGLE FOR COURSE FIELD
 	showUpdateForm(studentUpdateForm.courseForm, studentUpdateBtn.updateCourseBtn);
+	showUpdateForm(profUpdateForm.deptForm, profUpdateBtn.updateDeptBtn);
 
-	}());
+	showUpdateForm(profUpdateForm.aboutForm, profUpdateBtn.updateAboutBtn);
 
-
+	
+	/*================ AJAX POST REQUESTS FOR PROFILE UPDATES ==========================*/
 	/*
 	UPDATE NAME
 	*/
@@ -211,8 +232,8 @@ $(document).ready(function(){
 			 data: creds,
 			 success: function(data) {
 			 	if( data.updated ) {	
-					 $('#banner-stud-name').html("<small class='success'><i class='fa fa-check-circle'></i>&nbsp; You have updated you name</small>");
-					 nameForm.delay(1500).slideUp();
+					 $('#banner-stud-name').html("<small class='success'><i class='fa fa-check-circle'></i>&nbsp; You have updated your name</small>");
+					studentUpdateForm.nameForm.delay(1500).slideUp();
 				} else {
 					
 					 $('#banner-stud-name').html("<small class='error'><i class='fa fa-exclamation-circle'></i>&nbsp;Your name hasn't been updated</small>");
@@ -239,7 +260,7 @@ $(document).ready(function(){
 			 success: function(data) {
 			 	if( data.updated ) {	
 					 $('#banner-stud-usrn').html("<small class='success'><i class='fa fa-check-circle'></i>&nbsp; You have updated your username</small>");
-					 usernForm.delay(1500).slideUp();
+					 studentUpdateForm.usernForm.delay(1500).slideUp();
 				} else {
 					
 					 $('#banner-stud-usrn').html("<small class='error'><i class='fa fa-exclamation-circle'></i>&nbsp;Your username hasn't been updated</small>");
@@ -251,7 +272,9 @@ $(document).ready(function(){
 		e.preventDefault();
 	});
 
-	/*UPDATE EMAIL*/
+	/*
+	UPDATE EMAIL
+	*/
 	$('#update_student_email').on('submit', function(e) {
 		var creds = $(this).serialize();
 
@@ -263,7 +286,7 @@ $(document).ready(function(){
 			 success: function(data) {
 			 	if( data.updated ) {	
 					 $('#banner-stud-email').html("<small class='success'><i class='fa fa-check-circle'></i>&nbsp; You have updated your email</small>");
-					 emailForm.delay(1500).slideUp();
+					 studentUpdateForm.emailForm.delay(1500).slideUp();
 				} else {
 					
 					 $('#banner-stud-email').html("<small class='error'><i class='fa fa-exclamation-circle'></i>&nbsp;Your email hasn't been updated</small>");
@@ -275,7 +298,9 @@ $(document).ready(function(){
 		e.preventDefault();
 	});
 
-	/*UPDATE COURSE*/
+	/*
+	UPDATE COURSE
+	*/
 	$('#update_student_course').on('submit', function(e) {
 		var creds = $(this).serialize();
 
@@ -287,7 +312,7 @@ $(document).ready(function(){
 			 success: function(data) {
 			 	if( data.updated ) {	
 					 $('#banner-stud-course').html("<small class='success'><i class='fa fa-check-circle'></i>&nbsp; You have updated your course</small>");
-					 courseForm.delay(1500).slideUp();
+					 studentUpdateForm.courseForm.delay(1500).slideUp();
 				} else {
 					
 					 $('#banner-stud-course').html("<small class='error'><i class='fa fa-exclamation-circle'></i>&nbsp;Your course hasn't been updated</small>");
@@ -298,124 +323,134 @@ $(document).ready(function(){
 
 		e.preventDefault();
 	});
+	
+	}());
 
-	/*
-	RELOAD Profile Picture fro database
-	*/
 
-	 function reloadPic() {
-	 	
+	/*========================= Reload Profile Picture from database ==========================*/
+	 
+	 (function(){
+	 	function reloadPic() {
 	 	  $.ajax({
 			 type: "GET",
 			 url:  baseURL+'students/get_profile_picture', 
+			
+			 dataType: 'json',
 			 success: function(data) {
-			 	$('#profile-picture').attr('src', baseURL+'assets/uploads/' + data['img']);
-			 }
-		});
-
-	 };
-	 		
-
-	reloadPic();
-
-
-
-	/*=======================
-	ALL ABOUT UI/UX
-	=========================*/
-	var msgTxt = $('textarea#msg');
-
-	msgTxt.click(function() {
-	
-		$('.panel-container .msg-img').animate({'height':'40px','width':'40px'}, 500, function(){
-				$('.panel-container').css({'backgroundColor':'#2196f3','color':'white','font-size':'15px','transition':'all 0.5s ease-in'});
-				$(this).addClass('img-thumbnail');
-		});
-
-	});
-
-	var walkItems =  [
-		'.walk-item .fa-envelope-open-o',
-		'.walk-item .fa-address-card-o',
-		'.walk-item .fa-comments-o',
-		'dummy'
-	];
-
-	var i = 0;
-	
-
-	function loadWalkthrough() {
-		$(walkItems[i]).animate({'font-size':'3em'});
-		$(walkItems[i-1]).animate({'font-size':'1em'}).delay(2000);
-		i++;
-
-		if(i  == walkItems.length) {
+			 		$('#profile-picture').attr('src', assetURL+'uploads/'+ data['img']);
 			
-			i = 0;
-			
-		}
-
-
-	}
-
-	setInterval(loadWalkthrough, 2000);
-
-
-
-
-	/*Current Professor Profile FROM STUDENT-view*/
-	$('.show-profile').on('click',function(e){
-		var contents = "";
-		var schedulList = "";
-		 $.ajax({
-				 type: "GET",
-				 url: baseURL +'students/current_professor/'+ $(this).data('id'), 
-				 success: function(data) {
-
-				 	contents += "<img src='"+assetURL+"uploads/"+data.personal['img']+"' alt='Profile Picture' class='img-responsive img-circle center-block current-img'>";
-				 	contents += "<h1 class='text-center title'>"+data.personal['name']+"</h1>";
-				 	contents += "<p class='text-center secondary-text'>"+data.personal['about']+"</p>";
-				 	contents += "<small class='pull-right'><a href='"+baseURL+"students/message/"+data.personal['prof_id']+"' class='send-btn'><i class='fa fa-comment-o'></i>&nbsp;Send Message</a></small> <br /><br />";
-				 	contents += `<table class="table">
-								<tbody>`;
-					contents += "<tr><td>Department</td>";
-					contents += "<td>" + data[0] + "</td></tr>";
-					contents += "<tr><td>Email Address</td>"
-				 	contents += "<td>" + data.personal['email'] + "</td><tr/>";
-					contents += `</tbody>
-									</table>`;
-				 	contents += "<br><h2 class='title text-center'>Schedule</h2></br>";
-				 	contents += `<table class='table table-hover table-striped'>
-								<thead>
-									 <tr>
-										<th>Room</th>
-										<th>Time</th>
-									 </tr>
-									 <tbody id='load-sched'>
-										
-									 </tbody>
-								</thead>
-				 		 	</table>`;
-
-				 		var scheds = data.sched;
-				 		
-				 		 	$.each(scheds, function(index){
-				 			schedulList += `<tr>
-											<td>`+scheds[index]['room']+`</td>
-											<td>`+scheds[index]['f_from_time']+ ' '  + ' - ' + scheds[index]['to_time'] + ' '  +`</td>
-				 						</tr>`;
-				 			});
-				 		
- 				 	
-					$('#modal-current-prof').html(contents);
-					$('#load-sched').html(schedulList);
-					$('#loading-current-prof').hide();
 				 }
 			});
 
-		e.preventDefault();
-	});
+		 };
+		reloadPic();
+	}());
 
+
+
+	/*=================================================================================
+		                               ALL ABOUT UI/UX
+	===================================================================================*/
+	
+	/*======================== Animation to the user-chip when msg-txtarea ========================*/
+	(function(){
+		var msgTxt = $('textarea#msg');
+		msgTxt.click(function() {
+		
+			$('.panel-container .msg-img').animate({'height':'40px','width':'40px'}, 500, function(){
+					$('.panel-container').css({'backgroundColor':'#2196f3','color':'white','font-size':'15px','transition':'all 0.5s ease-in'});
+					$(this).addClass('img-thumbnail');
+			});
+
+		});
+	}());
+
+
+	/*======================= Animation of the walkthrough =====================*/
+	(function(){
+		var walkItems =  [
+			'.walk-item .fa-envelope-open-o',
+			'.walk-item .fa-address-card-o',
+			'.walk-item .fa-comments-o',
+			'dummy' //for traversing index
+		];
+
+		var i = 0;
+		
+
+		function loadWalkthrough() {
+			$(walkItems[i]).animate({'font-size':'3em'});
+			$(walkItems[i-1]).animate({'font-size':'1em'}).delay(2000);
+			i++;
+
+			if(i  == walkItems.length) {
+				
+				i = 0;
+				
+			}
+		}
+
+		setInterval(loadWalkthrough, 2000);
+	}());
+
+
+
+
+	/*==================== Current Professor Profile FROM STUDENT-view ===============================*/
+	(function(){
+		$('.show-profile').on('click',function(e){
+		var contents = "";
+		var schedulList = "";
+			 $.ajax({
+					 type: "GET",
+					 url: baseURL +'students/current_professor/'+ $(this).data('id'), 
+					 success: function(data) {
+
+					 	contents += "<img src='"+assetURL+"uploads/"+data.personal['img']+"' alt='Profile Picture' class='img-responsive img-circle center-block current-img'>";
+					 	contents += "<h1 class='text-center title'>"+data.personal['name']+"</h1>";
+					 	contents += "<p class='text-center secondary-text'>"+data.personal['about']+"</p>";
+					 	contents += "<small class='pull-right'><a href='"+baseURL+"students/message/"+data.personal['prof_id']+"' class='send-btn'><i class='fa fa-comment-o'></i>&nbsp;Send Message</a></small> <br /><br />";
+					 	contents += `<table class="table">
+									<tbody>`;
+						contents += "<tr><td>Department</td>";
+						contents += "<td>" + data[0] + "</td></tr>";
+						contents += "<tr><td>Email Address</td>"
+					 	contents += "<td>" + data.personal['email'] + "</td><tr/>";
+						contents += `</tbody>
+										</table>`;
+					 	contents += "<br><h2 class='title text-center'>Schedule</h2></br>";
+					 	contents += `<table class='table table-hover table-striped'>
+									<thead>
+										 <tr>
+											<th>Room</th>
+											<th>Time</th>
+										 </tr>
+										 <tbody id='load-sched'>
+											
+										 </tbody>
+									</thead>
+					 		 	</table>`;
+
+					 		var scheds = data.sched;
+					 		
+					 		 	$.each(scheds, function(index){
+					 			schedulList += `<tr>
+												<td>`+scheds[index]['room']+`</td>
+												<td>`+scheds[index]['f_from_time']+ ' '  + ' - ' + scheds[index]['to_time'] + ' '  +`</td>
+					 						</tr>`;
+					 			});
+					 		
+	 				 	
+						$('#modal-current-prof').html(contents);
+						$('#load-sched').html(schedulList);
+						$('#loading-current-prof').hide();
+					 }
+				});
+
+			e.preventDefault();
+		});
+
+	}());
 	
 });
 

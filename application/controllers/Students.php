@@ -42,6 +42,7 @@ Class Students extends CI_Controller {
 						'name' => $user->name,
 						'email' => $user->email,
 						'course' => $user->course,
+						'img' => $user->img
 					];
 
 					// Set session using useredata
@@ -252,28 +253,30 @@ Class Students extends CI_Controller {
 			redirect('students','refresh');
 		}
 
-		$response = false; //Set boolean of the response
+
 
 		// inputs
 		$msg = $this->input->post('msg', true);
 		$to = $this->input->post('to_id', true); //hidden input based on the ID of the professor
 		$conversation_id = $this->input->post('conversation_id', true); //hidden input of the conversation id
 
-		// DATA
-		$data = [
-			'conversation_id' => $conversation_id,
-			'msg' => trim($msg),
-			'status' => '0',
-			'from_id' => $this->session->userdata('stud_id'),
-			'to_id' =>  $to
-		];
+		if( !empty($msg) ) {
+			// DATA
+			$data = [
+				'conversation_id' => $conversation_id,
+				'msg' =>  trim($msg),
+				'status' => '0',
+				'from_id' => $this->session->userdata('stud_id'),
+				'to_id' =>  $to
+			];
 
-		// add DATA to DB
-		$new_data = $this->crud->add('msg', $data);
+			// add DATA to DB
+			$new_data = $this->crud->add('msg', $data);
 
-		if( $new_data ) { //if added successfully
-			$response = true;
-		} 
+			if( $new_data ) { //if added successfully
+				$response = true;
+			} 
+		}
 
 		echo json_encode(['sent', $response]);
 	}
@@ -541,7 +544,7 @@ Class Students extends CI_Controller {
 		$data['cur_prof'] = $this->crud->get_single('professors', ['prof_id' => $prof_id]);
 		
 		/*
-		Get the long-name-version of the department by accessing it using get_dept() as a standalone variable.
+		Create another query to get the long-name-department instead of the ID
 		*/
 		$data['department'] = $this->schedule->get_dept($data['cur_prof']->department);
 
@@ -550,6 +553,7 @@ Class Students extends CI_Controller {
 		echo $current;
 		
 	}
+
 
 
 

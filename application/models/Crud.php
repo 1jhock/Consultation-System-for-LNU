@@ -68,27 +68,16 @@ Class Crud extends CI_Model {
 	}
 
 
+	// Specifics
+	function search_result($keyword) {
+		$this->db->select('name, course','img')->from('students');
+		$this->db->like('name', $keyword);
+		$results = $this->db->get();
+		return $results->result();
+	}
 
 
-	// function get_private_msgs($from, $to) {
-	// 	$this->db->query("SELECT * FROM msg uhm1 WHERE uhm1.msg_id=(
- //       SELECT msg_id FROM msg uhm2 
- //       WHERE (uhm1.to_id=uhm2.to_id AND uhm1.from_id=uhm2.from_id) 
- //       OR uhm1.to_id=uhm2.from_id ORDER BY msg_id DESC)
 
-	// 	SELECT * from msg 
- //       ");
-	// 	$msg = $this->db->get();
-	// 	return $msg->result();
-	// }
-
-	// function load_emoji($input_carrier) {
-
- // 		$image_array = get_clickable_smileys(asset_url() . 'smileys/', $input_carrier); //input_carrier is hte inpnut where emojis are used.
- //        $col_array = $this->table->make_columns($image_array, 8);
-
- //        return  $this->table->generate($col_array);
-	// }
 }
 
 ?>

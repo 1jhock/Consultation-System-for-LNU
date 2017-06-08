@@ -507,6 +507,15 @@ Class Professors extends CI_Controller {
 	
 	}
 
+	function get_search_result($keyword) {
+		header('Content-Type: application/json'); 
+		
+		$data['results'] = $this->crud->search_result($keyword);
+
+		$json = json_encode($data['results']);
+
+		echo $json;
+	}
 
 
 

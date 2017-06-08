@@ -77,7 +77,7 @@
 				<!-- DEPARTMENT -->
 				<td><b>Department</b></td>
 				<td>
-					<?=$infos->department?> 
+					<?=$this->schedule->get_dept($infos->department)?> 
 					<div id="banner-prof-dept"></div>
 						<form action="" method="post" id="update_prof_dept">
 							<div class="form-group">
