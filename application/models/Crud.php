@@ -68,13 +68,68 @@ Class Crud extends CI_Model {
 	}
 
 
-	// Specifics
+	/*============ Specifics ============*/
+	// works on deprtmant(professor) && course(student)
+	function get_course($course_id) {	
+		$this->db->select()->from('courses')->where('course_id', $course_id);
+		$course = $this->db->get();
+		return $course->row('full_name');
+	}
+
+	function get_dept($dept_id) {
+		
+		$this->db->select()->from('department')->where('dept_id', $dept_id);
+		$dept = $this->db->get();
+		return $dept->row('full_name');
+	}
+
 	function search_result($keyword) {
-		$this->db->select('name, course','img')->from('students');
+		$this->db->select('name, course, img')->from('students');
 		$this->db->like('name', $keyword);
 		$results = $this->db->get();
 		return $results->result();
 	}
+
+	function get_unread_msgs($prof_id) {
+		$this->db->select('conversation_id, group_concat(msg) as msgs')->from('msg')->where("(to_id = '$prof_id') AND status = 0 ");
+		$this->db->group_by('conversation_id');
+		$results = $this->db->get();
+		return $results->result();
+	}
+
+	function get_sender_id($conversation_id) {
+		$this->db->select()->from('msg')->where('conversation_id', $conversation_id);
+		$result = $this->db->get();
+
+		// get the sender's ID
+		$stud_id = $result->row('from_id');
+		return $stud_id;
+		
+	}
+
+	function get_sender($stud_id) {
+		$this->db->select()->from('students')->where('stud_id', $stud_id);
+		$student = $this->db->get();
+		return $student->row('name');
+	}
+
+	function get_total_unread_frm_stud($prof_id, $stud_id) {
+		$unread = $this->crud->get_total_where('msg', ['to_id' => $prof_id, 'from_id' => $stud_id, 'status' => 0]);
+
+		return ($unread > 0) ? '&nbsp;&nbsp;<span class="badge">'.$unread .'</span>': '';
+	}
+
+	function get_total_stud_per_dept($dept_id) {
+		$this->db->select('department.full_name, count(students.stud_id) as count_stud')->from('students');
+		$this->db->join('courses','courses.course_id = students.course');
+		$this->db->join('department','courses.dept_id = department.dept_id');
+		$this->db->group_by('department.full_name');
+		$this->db->where('department.dept_id', $dept_id);
+		$results = $this->db->get();
+		return $results->row('count_stud');
+	}
+
+	
 
 
 

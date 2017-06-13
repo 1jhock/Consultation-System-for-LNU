@@ -6,9 +6,12 @@
 		<li>
 			<a href="<?=base_url()?>students/list_professor">Professors by Department</a>
 		</li>
-		<li class="active"><?=$department->short_name?></li>
+		<li>
+			<a href="<?=base_url()?>students/course_list/<?=$department->dept_id?>"><?=$department->full_name?></a>
+		</li>
+		<li class="active"><?=$courses->short_name?></li>
 	</ol>
-	<h1 class="text-center title"><?=$department->full_name?></h1>	
+	<h1 class="text-center title"><?=$courses->full_name?></h1>	
 	<br><br>
 	<div class="row">
 		<div class="col-lg-12">

@@ -6,7 +6,6 @@ Class Schedule extends CI_Model {
 		$query = $this->db->query("SELECT DATE_FORMAT(from_time, '%h:%i %p') as f_from_time,  DATE_FORMAT(to_time, '%h:%i %p') as to_time, room, prof_id, weekday FROM schedule where prof_id = $prof_id AND weekday = $weekday ORDER BY from_time ASC");
 		/*Problem: Sort time*/
 		return $query->result();
-		
 	}
 
 	function check_existing_schedule($from, $to) {
@@ -25,11 +24,10 @@ Class Schedule extends CI_Model {
 	}
 
 
-	// works on deprtmant(professor) && course(student)
-	function get_dept($dep_id) {	
-		$this->db->select()->from('courses')->where('course_id', $dep_id);
-		$dept = $this->db->get();
-		return $dept->row('full_name');
+	function get_total_class($prof_id, $weekday) {
+		$class_today = $this->schedule->get_schedules($prof_id, $weekday);
+
+		return count($class_today);
 	}
 
 

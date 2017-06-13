@@ -47,7 +47,7 @@
 			<!--  -->
 			<div class="list-panel">
 					<div class="list-heading"><h4 style="margin: 0px;"><i class="fa fa-address-card-o fa-padding"></i>Contact Professors</h4>
-							<p style="color: #97b2c6;">&nbsp;&nbsp;<?= $this->schedule->get_dept($this->session->userdata('course')) ?></p>
+							<p style="color: #97b2c6;">&nbsp;&nbsp;<?= $this->crud->get_dept($this->session->userdata('course')) ?></p>
 					</div>
 					<div class="list-body">
 						<?php if(!empty($professors)) : ?>

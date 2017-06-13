@@ -399,6 +399,7 @@ $(document).ready(function(){
 	/*==================== Current Professor Profile FROM STUDENT-view ===============================*/
 	(function(){
 		$('.show-profile').on('click',function(e){
+
 		var contents = "";
 		var schedulList = "";
 			 $.ajax({

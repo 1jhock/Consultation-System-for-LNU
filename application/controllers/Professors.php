@@ -69,21 +69,58 @@ Class Professors extends CI_Controller {
 		if($this->session->userdata('prof_id') == FALSE ) {
 				redirect('professors','refresh');
 		}
+		// SET TIMEZONE
+		date_default_timezone_set('Asia/Kuala_Lumpur'); //for PHL
+		$current_day = date('N');
 
+		$prof = $this->session->userdata('prof_id');
 		// Get all the list of existing students
 		$data['students'] = $this->crud->get_specified('students', ['course' => $this->session->userdata('department')]);
 
 		// GET the recent msg where sender is the user
 		$recent_msg = $this->crud->get_single('msg', ['from_id'=> $this->session->userdata('prof_id')]);
 
+		/*================ Glance Area ==================*/
+		// get interactions total today - *msgs today
+		$data['interactions'] = $this->crud->get_total_where('msg','(date_created >= CURDATE())');
+
+		//get total unread msg
+		$data['unread_msg'] = $this->crud->get_total_where('msg', "(to_id = '$prof') AND status = 0");
+
+		//get total of all msg
+		$data['all_msg'] = $this->crud->get_total_where('msg', "(from_id = '$prof') OR (to_id = '$prof')");
+
+		//get total students / dept
+		$data['total_stud_per_dept'] = $this->crud->get_total_where('students', ['course' => $this->session->userdata('department')]);
+
+		//get total students for all student
+		$data['total_stud'] = $this->crud->get_total('students');
+
+		// get total class today
+		$data['total_class'] = $this->schedule->get_total_class($this->session->userdata('prof_id'), $current_day);
+		/*
+		Buwas: /Separate model of dept and course + create dept table. 
+			   /Make the get_total_dept dynamic.
+			   All Student UI
+			   /Redirect unread msg to current_msg
+			   /Update status when click
+			   Create visual to indicate unread msg
+		*/
 		if($recent_msg) {
 			// Determine the users
 			// Needed to get necessary data to load in view
 			$user1 = $recent_msg->from_id;
 			$user2 = $recent_msg->to_id;
 
-			// get info of the student of the current message thread
+			// get info of the student(recipient) of message
 			$data['cur_stud'] = $this->crud->get_single('students',['stud_id' => $user2]);
+
+			//Get all the conversation where prof is a sender or reciever where status = 0	
+			 // GET unread msgs// GET unread msgs
+			// $data['conversations'] = $this->crud->get_specified('conversation',"(user_1 = $prof OR user_2 = $prof)");
+			$data['conversations'] = $this->crud->get_unread_msgs($prof);
+			// *get all the unread msg group_by conversation_id
+
 
 			// Get the conversation_id
 			$data['conversation_data'] = $this->crud->get_single('conversation',"(user_1 = $user1 AND user_2 = $user2) OR (user_1= $user2 AND user_2 = $user1)");
@@ -95,10 +132,12 @@ Class Professors extends CI_Controller {
 		$this->load->view('templates/header');
 		$this->load->view('professor/index', $data);
 		$this->load->view('templates/footer');
+		
+		
 	}
 
 	function professor_signup() {
-		$data['courses'] = $this->crud->get_all('courses');
+		$data['departments'] = $this->crud->get_all('department');
 
 		$this->load->view('templates/header');
 		$this->load->view('professor/signup', $data);
@@ -143,7 +182,6 @@ Class Professors extends CI_Controller {
 	}
 
 	function message($id) {
-
 		
 		/*USERS*/
 		$user1 = $this->session->userdata('prof_id'); //the student
@@ -157,7 +195,7 @@ Class Professors extends CI_Controller {
 			// SET it to another variable.
 			$data['conversation_data'] = $conversation_id;
 
-		// IF the conversation_is does not exist, create an ID for them.
+		// IF the conversation_id does not exist, create an ID for them.
 		} else {
 			$data = [
 				'user_1' => $this->session->userdata('prof_id'),
@@ -175,7 +213,7 @@ Class Professors extends CI_Controller {
 	function current_message($id) {
 
 		if($this->session->userdata('prof_id') == FALSE ) {
-		redirect('professors','refresh');
+			redirect('professors','refresh');
 		}
 
 
@@ -189,6 +227,9 @@ Class Professors extends CI_Controller {
 		// GET all the conversation/s where user_1 and user_2 (vice-versa) exist
 		$conversation_id = $this->crud->get_single('conversation',"(user_1 = $user1 AND user_2 = $user2) OR (user_1= $user2 AND user_2 = $user1)");
 		
+		// UPDATE the status to indicate read
+		$this->crud->update('msg', ['conversation_id' => $conversation_id->conversation_id], ['status' => 1]);
+
 		$data['conversation_data'] = $conversation_id;
 
 
@@ -245,7 +286,7 @@ Class Professors extends CI_Controller {
 		// Get the current account information
 		$data['infos'] =  $this->crud->get_single('professors',['prof_id' => $id]);
 		// Ge Courses as dropdown
-		$data['courses'] = $this->crud->get_all('courses');
+		$data['departments'] = $this->crud->get_all('department');
 		
 		$this->load->view('templates/header');
 		$this->load->view('professor/account',$data);
@@ -418,35 +459,6 @@ Class Professors extends CI_Controller {
 		echo $json;
 	}
 
-	// function activity_date() {
-		
-	// 	$dates = $this->crud->get_all('msg');
-
-	// 	foreach ($dates as $date) {
-	// 		$dates_repo[] = date_create($date->date_created);
-	// 	}
-
-	// 	/*===================================
-	
-	// 	=====================================*/
-
-
-	// 	foreach($dates_repo as $single) {
-	// 		$times[] = date_format($single, 'g:i A');
-
-	// 		foreach($times as $time) {
-	// 			$splitted_time[] = explode(' ', $time);
-				
-	// 		}
-	// 	}
-
-	// 	foreach($splitted_time as $time) {
-	// 		echo 'The time is: ' . $time[0] . ' and the desc is: ' . $time[1] . "<br>";
-	// 	}
-		
-	// }
-
-
 
 		/*AJAX Request*/
 	function add_schedule() {
@@ -507,6 +519,7 @@ Class Professors extends CI_Controller {
 	
 	}
 
+	/*AJAX REQUEST*/
 	function get_search_result($keyword) {
 		header('Content-Type: application/json'); 
 		
@@ -517,6 +530,19 @@ Class Professors extends CI_Controller {
 		echo $json;
 	}
 
+	function students_list() {
+		if($this->session->userdata('prof_id') == FALSE ) {
+			redirect('professors','refresh');
+		}
+
+		$data['dept'] = $this->crud->get_dept($this->session->userdata('department'));
+
+		$data['students'] = $this->crud->get_all('students');
+
+		$this->load->view('templates/header');
+		$this->load->view('professor/students_list', $data);
+		$this->load->view('templates/footer');
+	}
 
 
 

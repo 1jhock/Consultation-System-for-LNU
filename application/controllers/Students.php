@@ -304,7 +304,7 @@ Class Students extends CI_Controller {
 		if($this->session->userdata('stud_id') == FALSE ) {
 			redirect('students','refresh');
 		}
-
+		
 		// Get the current account information
 		$data['infos'] =  $this->crud->get_single('students',['stud_id' => $id]);
 
@@ -488,40 +488,46 @@ Class Students extends CI_Controller {
 		if($this->session->userdata('stud_id') == FALSE ) {
 			redirect('students','refresh');
 		}
-		// GET THE NUMBER OF PROFESSORS BY DEPT
-		// courses available: Looping courses para scalable
-		$courses = [
-			'ITs' => ['BSIT' => 1],
-			'CSs' => ['BSCS' => 2],
-			'BSEDs' =>['BSED' => 4],
-			'BEEDs' => ['BEED' => 3],
-			'CEs' => ['BSCE' => 8],
-			'BLISs' => ['BLIS' => 7]
+		
+		//get the number of courses under n department
+		// *cannot use direct looping of the query cause the view is customed so use this*
+		$dept = [
+			'CompEd' => 1, //dept_id
+			'BED'    => 2,
+			'Math'   => 3,
+			'Hum'    => 4,
+			'Eng'    => 6,
+			'Mangnt' => 7
 		];
-		// loop the assoc-arr
-		foreach($courses as $course => $course_info) {
-			foreach($course_info as $value => $id) {
-				// get all total number of prof/department
-				$data[$course] = $this->crud->get_total_where('professors', ['department'=>$id]);
-				// get infos / course
-				$data[$course.'_link'] = $this->crud->get_single('courses', ['short_name' => $value]);
-			}
+	
+		
+		foreach($dept as $dept_name => $id) {
+			// get the total number of courses / dept using dept_id above
+			$data[$dept_name] = $this->crud->get_total_where('courses', ['dept_id' => $id]);
+			$data['stud_count_'.$dept_name] = $this->crud->get_total_stud_per_dept($id);
 		}
-
 
 		$this->load->view('templates/header');
 		$this->load->view('student/professor_list', $data);
 		$this->load->view('templates/footer');
 	}
 
-	function professor_by_department($department_id) {
+	function course_list($dept_id) {
+		$data['courses'] = $this->crud->get_specified('courses', ['dept_id' => $dept_id]);
+		$data['department'] = $this->crud->get_single('department',['dept_id' => $dept_id]);
+		$this->load->view('templates/header');
+		$this->load->view('student/course_list',$data);
+		$this->load->view('templates/footer');
+	}
+
+	function professor_by_department($dept_id,$course_id) {
 		if($this->session->userdata('stud_id') == FALSE ) {
 			redirect('students','refresh');
 		}
 
-		$data['department'] = $this->crud->get_single('courses', ['course_id' => $department_id]);
-
-		$data['professors'] = $this->crud->get_specified('professors', ['department' => $department_id]);
+		$data['courses'] = $this->crud->get_single('courses', ['course_id' => $course_id]);
+		$data['department'] = $this->crud->get_single('department', ['dept_id' => $dept_id]);
+		$data['professors'] = $this->crud->get_specified('professors', ['department' => $course_id]);
 
 		$this->load->view('templates/header');
 		$this->load->view('student/professors_by_department', $data);
@@ -546,7 +552,7 @@ Class Students extends CI_Controller {
 		/*
 		Create another query to get the long-name-department instead of the ID
 		*/
-		$data['department'] = $this->schedule->get_dept($data['cur_prof']->department);
+		$data['department'] = $this->crud->get_dept($data['cur_prof']->department);
 
 		$current = json_encode(["personal" => $data['cur_prof'], "sched" => $data['schedules'], $data['department']]);
 		

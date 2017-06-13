@@ -23,8 +23,8 @@
 				<div class="form-group">
 					<label for="username">Department</label>
 					<select name="department" id="department" class="form-control">
-						<?php foreach($courses as $course) :?>
-							<option value="<?=$course->course_id?>"><?=$course->short_name?></option>
+						<?php foreach($departments as $dept) :?>
+							<option value="<?=$dept->dept_id?>"><?=$dept->full_name?></option>
 						<?php endforeach; ?>
 					</select>
 				</div>

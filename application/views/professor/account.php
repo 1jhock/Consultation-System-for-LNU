@@ -77,15 +77,15 @@
 				<!-- DEPARTMENT -->
 				<td><b>Department</b></td>
 				<td>
-					<?=$this->schedule->get_dept($infos->department)?> 
+					<?=$this->crud->get_dept($infos->department)?> 
 					<div id="banner-prof-dept"></div>
 						<form action="" method="post" id="update_prof_dept">
 							<div class="form-group">
 								
 								<label for="username">Select Department</label>
 								<select name="department" id="department" class="form-control" style="width: 250px !important">
-									<?php foreach($courses as $course) :?>
-										<option value="<?=$course->course_id?>"><?=$course->short_name?></option>
+									<?php foreach($departments as $dept) :?>
+										<option value="<?=$dept->dept_id?>"><?=$dept->full_name?></option>
 									<?php endforeach; ?>
 								</select>
 							</div>

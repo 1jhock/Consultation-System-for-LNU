@@ -1,6 +1,6 @@
 $(document).ready(function(){
 var baseURL = $('#base_url').val();
-
+	var assetURL = $('#asset_url').val();
 
 	/*
 	SIGNUP FOR PROFESSORS
@@ -341,6 +341,10 @@ var baseURL = $('#base_url').val();
 	 (function(){
 
 	 	let searchContainer = $('#search-results');
+	 	
+	 	searchContainer.hide();
+
+	 	
 
 	 	$('#search-student').keyup(function(){
 	 		$.ajax({
@@ -348,17 +352,44 @@ var baseURL = $('#base_url').val();
 				 url:  baseURL+'professors/get_search_result/'+$('#search-student').val(), 
 				 success: function(data) {
 				 	if( data ) {
-				 		searchContainer.html(`
-								<h4><a href="">`+data[0].name+`</a></h4> <br />
-								<small>`+data[0].course+`</small>
-				 			`);
-				 	} else {
-				 		searchContainer.html('nope');
-				 	}
+				 		// show results
+				 		searchContainer.slideDown(400);
+
+				 		var resultString = "";
+				 
+				 		data.forEach(function(value, index) {
+
+				 			resultString += "<tr>";
+					 		resultString += "<td><img src='"+assetURL+"uploads/"+value.img+"' alt='Profile' style='width:60px' /></td>";
+					 		resultString += `<td>
+					 							<h3 class="title" id="name-result">`+value.name+`</h3>
+					 							<small><a href=""><i class="fa fa-comment" style="color: #3498db"></i>&nbsp;&nbsp;Message</a></small>&nbsp;&nbsp;&nbsp;<small><a href=""><i class="fa fa-address-book" style="color: #e74c3c"></i>&nbsp;&nbsp;Profile</a></small>
+					 					    </td>`;
+					 		resultString += "</tr>";
+				 		});
+
+				 			
+
+				 		searchContainer.html(resultString);
+
+				 	} 
+
 				 }
 	 		});
 
+	 		// Hide when search is empty
+	 		function hideSearchResults() {
+	 			if($('#search-student').val() == "") {
+	 				searchContainer.slideUp(400);
+	 			}
+		 	}		
+
+		 	setTimeout(hideSearchResults, 100);
+
+
 	 	});
+
+
 
 	 }());
 

@@ -9,6 +9,9 @@ html, body {
 @font-face {
   font-family: 'def-font';
   src: url("font/segoe.ttf"); }
+h1, h2, h3, h4, h5, h6 {
+  margin: 0px !important; }
+
 .white-text {
   color: white; }
 
@@ -86,6 +89,18 @@ html, body {
 .fa-padding {
   padding: 7px; }
 
+.fa-wrench {
+  color: #ff883a; }
+
+.fa-sign-out {
+  color: #df7c72; }
+
+.fa-mortar-board {
+  color: #60db94; }
+
+.fa-search {
+  color: #2196f3; }
+
 /* ============BUTTONS============ */
 .btn-light {
   outline: none;
@@ -116,6 +131,14 @@ html, body {
     text-decoration: none !important; }
   .btn-student-sm:focus {
     text-decoration: none !important; }
+
+#recent-msg-prof-btn {
+  background: #56CCF2;
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #2F80ED, #56CCF2);
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #2F80ED, #56CCF2);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */ }
 
 .btn-default {
   border-radius: 40px !important;
@@ -306,8 +329,8 @@ ul.basic-container {
   white-space: pre-wrap; }
 
 .profile-picture {
-  width: 20px;
-  height: 20px;
+  width: 25px;
+  height: 25px;
   border-radius: 50%; }
 
 .course-container {
@@ -322,6 +345,14 @@ ul.basic-container {
   .course-container:hover .overlay {
     opacity: 1;
     box-shadow: 0px 3px 15px #8c8c8c; }
+
+.overlay-block {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end; }
+  .overlay-block .badge {
+    border: 1px solid white;
+    background-color: transparent; }
 
 .course-container {
   display: block; }
@@ -348,7 +379,7 @@ ul.basic-container {
   .list-panel .list-heading {
     margin: 0px;
     background-color: #e3f2fd;
-    padding: 0px 10px;
+    padding: 5px 10px;
     border: 1px solid #bbdef8;
     border-top-radius: 4px; }
   .list-panel .list-body {
@@ -414,12 +445,13 @@ td {
 
 #search-container {
   background-color: white;
-  margin: 0px 10px;
+  border: 2px dashed #777 !important;
   border-radius: 40px;
   display: flex;
   align-items: center;
   border: 1px solid #bdc3c7;
-  padding: 0px; }
+  padding: 0px;
+  width: 83%; }
   #search-container:hover {
     border: 1px solid #2196f3; }
   #search-container #search-student {
@@ -435,7 +467,12 @@ td {
     margin: 0px auto;
     outline: none;
     display: flex;
-    background-color: #2196f3;
+    background: #56CCF2;
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #2F80ED, #56CCF2);
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #2F80ED, #56CCF2);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     color: white; }
     #search-container #search-btn:hover {
       background-color: #2980b9;
@@ -444,6 +481,57 @@ td {
       color: #2980b9; }
 
 #search-results {
-  background-color: white; }
+  background-color: white;
+  padding: 14px;
+  width: 83%; }
+
+.navbar-default {
+  background-color: #f1f1f1 !important;
+  border-color: #f1f1f1 !important; }
+  .navbar-default .navbar-nav li {
+    border-bottom: 2px solid #f1f1f1; }
+  .navbar-default .navbar-nav li:hover {
+    border-bottom: 2px solid #2196f3; }
+
+.glance {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-height: 300px; }
+
+.glance-container {
+  border-radius: 50%;
+  color: white;
+  width: 103px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 50px; }
+
+#student {
+  background: #1FA2FF;
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #A6FFCB, #12D8FA, #1FA2FF);
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #A6FFCB, #12D8FA, #1FA2FF);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */ }
+
+#unread {
+  background: #4568DC;
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #B06AB3, #4568DC);
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #B06AB3, #4568DC);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */ }
+
+#inter {
+  background: #F7971E;
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #FFD200, #F7971E);
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #FFD200, #F7971E);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */ }
 
 /*# sourceMappingURL=style.css.map */

@@ -17,6 +17,10 @@ html, body {
 	src: url('font/segoe.ttf');
 }
 
+h1,h2,h3,h4,h5,h6 {
+	margin: 0px !important;
+}
+
 .white-text {
 	color: white;
 }
@@ -114,12 +118,27 @@ html, body {
 }
 
 // FONT-AWESOME
+
 .fa-padding{
 	padding: 7px;
 
 }
 
+.fa-wrench {
+	color: lighten(#d35400, 20%);
+}
 
+.fa-sign-out {
+	color: lighten(#c0392b, 20%);
+}
+
+.fa-mortar-board {
+	color: lighten(#27ae60, 20%);
+}
+
+.fa-search {
+	color: $student-color;
+}
 /* ============BUTTONS============ */
 
 .btn-light {
@@ -153,7 +172,7 @@ html, body {
 	border-radius: 40px;
 	border: 0px;
 	cursor: pointer;
-	
+
 	&:hover {
 		background-color: darken($student-color,15%);
 		text-decoration: none !important;
@@ -162,6 +181,13 @@ html, body {
 	&:focus {
 		text-decoration: none !important;
 	}
+
+}
+
+#recent-msg-prof-btn {
+	background: #56CCF2;  /* fallback for old browsers */
+	background: -webkit-linear-gradient(to right, #2F80ED, #56CCF2);  /* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(to right, #2F80ED, #56CCF2); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
 }
 
@@ -425,8 +451,8 @@ ul.basic-container {
 }
 
 .profile-picture {
-	width: 20px;
-	height: 20px;
+	width: 25px;
+	height: 25px;
 	border-radius: 50%;
 }
 
@@ -447,6 +473,18 @@ ul.basic-container {
 	&:hover .overlay{
 		opacity: 1;
 		box-shadow: 0px 3px 15px #8c8c8c;
+	}
+
+}
+
+.overlay-block 
+	display: flex;
+	justify-content: space-around;
+	align-items: flex-end;
+
+	.badge {
+		border: 1px solid white; 
+		background-color: transparent;
 	}
 
 }
@@ -479,7 +517,7 @@ ul.basic-container {
 	.list-heading {
 		margin: 0px;
 		background-color: #e3f2fd;
-		padding: 0px 10px;
+		padding: 5px 10px;
 		border: 1px solid #bbdef8;
 		border-top-radius: $border-radius;
 
@@ -574,12 +612,14 @@ td {
 
 #search-container {
 	background-color: white;
-	margin: 0px 10px;
+	border: 2px dashed #777 !important;
 	border-radius: 40px;
 	display: flex;
 	align-items: center;
 	border: 1px solid #bdc3c7;
+
 	padding: 0px;
+	width: 83%;
 
 	&:hover {
 		border: 1px solid $student-color;
@@ -599,7 +639,10 @@ td {
 		margin: 0px auto;
 		outline: none;
 		display: flex;
-		background-color: $student-color;
+		background: #56CCF2;  /* fallback for old browsers */
+		background: -webkit-linear-gradient(to right, #2F80ED, #56CCF2);  /* Chrome 10-25, Safari 5.1-6 */
+		background: linear-gradient(to right, #2F80ED, #56CCF2); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
 		color: white;
 		&:hover {
 			
@@ -614,7 +657,64 @@ td {
 
 }
 
+
 #search-results {
 	background-color: white;
+	padding: 14px;
+	width: 83%;
+
+}
+
+.navbar-default {
+	background-color: #f1f1f1 !important;
+	border-color: #f1f1f1 !important;
+
+	.navbar-nav {
+		li {
+			border-bottom: 2px solid #f1f1f1;
+		}
+		li:hover {
+			border-bottom: 2px solid $student-color;
+		} 
+	}
+}
+
+.glance {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	max-height: 300px;
+}
+
+.glance-container {
+	border-radius: 50%;
+	color: white;
+	width: 103px;
+	height: 100px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 50px;
+}
+
+#student {
+	background: #1FA2FF;  /* fallback for old browsers */
+	background: -webkit-linear-gradient(to right, #A6FFCB, #12D8FA, #1FA2FF);  /* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(to right, #A6FFCB, #12D8FA, #1FA2FF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+#unread {
+	background: #4568DC;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #B06AB3, #4568DC);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #B06AB3, #4568DC); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+
+}
+
+#inter {
+	background: #F7971E;  /* fallback for old browsers */
+	background: -webkit-linear-gradient(to right, #FFD200, #F7971E);  /* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(to right, #FFD200, #F7971E); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
 }
