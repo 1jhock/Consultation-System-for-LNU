@@ -1,9 +1,20 @@
 <div class="container-fluid">
-	<a href="<?=base_url()?>students/list_professor" class="btn btn-primary"><i class="fa fa-users"></i>&nbsp;See all Professors</a> <a href="#map-modal" data-toggle="modal" class="btn btn-primary"><i class="fa fa-map"></i>&nbsp;Show Map</a><br> <br> <br>
+	<a href="<?=base_url()?>students/list_professor" class="focus-btn btn-student-sm pull-right"><i class="fa fa-users"></i>&nbsp;See all Professors</a> &nbsp;&nbsp;<a href="#map-modal" data-toggle="modal" class="focus-btn btn-student-sm pull-right" style="margin-right: 15px;"><i class="fa fa-map"></i>&nbsp;Show Map</a><br> <br> <br>
 	
 			<hr>
 	<div class="row">
-		<div class="col-lg-7">
+	<div class="col-lg-1">
+		<div id="prof-hub">
+			<?php if(empty($all_profs)) : ?>
+
+			<?php else: ?>
+				<?php foreach($all_profs as $prof) : ?>
+					<img src="<?=asset_url()?>uploads/<?=$prof->img?>" alt="" class="profile-head" data-toggle="tooltip" title="<?=$prof->name?>" data-placement="right">
+				<?php endforeach; ?>
+			<?php endif; ?>
+		</div>
+	</div>
+		<div class="col-lg-8">
 			<div class="list-panel">
 				<div class="list-heading">
 					<h4 class="only-fa"><i class="fa fa-comments-o fa-padding"></i>Recent Conversation
@@ -39,7 +50,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-lg-2"></div>
+		
 		<div class="col-lg-3">
 			
 			
@@ -47,7 +58,6 @@
 			<!--  -->
 			<div class="list-panel">
 					<div class="list-heading"><h4 style="margin: 0px;"><i class="fa fa-address-card-o fa-padding"></i>Contact Professors</h4>
-							<p style="color: #97b2c6;">&nbsp;&nbsp;<?= $this->crud->get_dept($this->session->userdata('course')) ?></p>
 					</div>
 					<div class="list-body">
 						<?php if(!empty($professors)) : ?>
@@ -61,7 +71,7 @@
 								      <h4 class="media-heading"><?=$professor->name?></h4>
 								      <span style="color: #e57373" data-toggle="tooltip" data-placement="right" title="Current Schedule"><i class="fa fa-map-marker"></i>&nbsp;<?=$this->schedule->get_current_schedule(date('H:i:s'), $professor->prof_id, date('N')) ?></span>
 								      <p><?=$professor->about?></p>
-								      <p> <?=$professor->email?>
+								      <small><?=$professor->email?></small>
 								      <hr>
 								      <small><a href="<?=base_url()?>students/message/<?=$professor->prof_id?>" class='send-btn'><i class="fa fa-comment-o"></i>&nbsp;Send Message</a></small>
 								    </div>

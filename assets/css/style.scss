@@ -112,9 +112,10 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 .no-result {
-	background-color: #f1f1f1;
-	padding: 10px 0px;
-	text-align: center;
+	height: 249px; 
+	display: flex; 
+	align-items: center; 
+	justify-content: center;
 }
 
 // FONT-AWESOME
@@ -172,7 +173,6 @@ h1,h2,h3,h4,h5,h6 {
 	border-radius: 40px;
 	border: 0px;
 	cursor: pointer;
-
 	&:hover {
 		background-color: darken($student-color,15%);
 		text-decoration: none !important;
@@ -184,7 +184,7 @@ h1,h2,h3,h4,h5,h6 {
 
 }
 
-#recent-msg-prof-btn {
+.focus-btn{
 	background: #56CCF2;  /* fallback for old browsers */
 	background: -webkit-linear-gradient(to right, #2F80ED, #56CCF2);  /* Chrome 10-25, Safari 5.1-6 */
 	background: linear-gradient(to right, #2F80ED, #56CCF2); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
@@ -214,7 +214,9 @@ h1,h2,h3,h4,h5,h6 {
 
 
 .send-btn {
-	border: 1px solid #3498db;
+
+	border-top:1px solid #bddff9;
+	border-bottom: 1px solid #075793;
 	background-color: $student-color;
 	padding: 4px 10px;
 	border-radius: $border-radius;
@@ -477,7 +479,7 @@ ul.basic-container {
 
 }
 
-.overlay-block 
+.overlay-block {
 	display: flex;
 	justify-content: space-around;
 	align-items: flex-end;
@@ -529,7 +531,7 @@ ul.basic-container {
 		overflow: auto;
 		background-color: white;
 		color: #607D8B;
-		padding: 20px 15px;
+		padding: 15px 15px;
 		border: 1px solid rgba(158, 158, 158, 0.19);
 
 	}
@@ -712,9 +714,44 @@ background: linear-gradient(to right, #B06AB3, #4568DC); /* W3C, IE 10+/ Edge, F
 
 }
 
-#inter {
+#inter { //for interaction
 	background: #F7971E;  /* fallback for old browsers */
 	background: -webkit-linear-gradient(to right, #FFD200, #F7971E);  /* Chrome 10-25, Safari 5.1-6 */
 	background: linear-gradient(to right, #FFD200, #F7971E); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
 }
+
+.avatar {
+
+	&:hover {
+		border-bottom: 2px solid #f1f1f1 !important;
+
+	}
+
+	
+	a {
+		color: #777 !important;
+
+	}
+}
+
+#prof-hub {
+	background-color: white;
+	color: white;
+	padding: 20px 10px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
+	max-height: 500px;
+	min-height: 500px;
+	overflow: auto;
+	border: 2px dashed #777;
+
+	.profile-head {
+		height: 40px;
+		width: 40px;
+		margin: 10px 5px;
+		border-radius: 50%;
+	}
+}
+

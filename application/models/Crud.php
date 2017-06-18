@@ -119,6 +119,7 @@ Class Crud extends CI_Model {
 		return ($unread > 0) ? '&nbsp;&nbsp;<span class="badge">'.$unread .'</span>': '';
 	}
 
+
 	function get_total_stud_per_dept($dept_id) {
 		$this->db->select('department.full_name, count(students.stud_id) as count_stud')->from('students');
 		$this->db->join('courses','courses.course_id = students.course');
@@ -129,7 +130,16 @@ Class Crud extends CI_Model {
 		return $results->row('count_stud');
 	}
 
-	
+	// select courses and the number of students under the course
+	function get_course_data($dept_id) {
+		$this->db->select('courses.course_id, courses.full_name, count(students.stud_id) as num_stud')->from('courses');
+		$this->db->join('students','courses.course_id = students.course');
+		$this->db->group_by('courses.full_name');
+		$this->db->group_by('courses.course_id');
+		$this->db->where('courses.dept_id',$dept_id);
+		$results = $this->db->get();
+		return $results->result();
+	}
 
 
 

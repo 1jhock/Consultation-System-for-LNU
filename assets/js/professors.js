@@ -1,5 +1,5 @@
 $(document).ready(function(){
-var baseURL = $('#base_url').val();
+    var baseURL = $('#base_url').val();
 	var assetURL = $('#asset_url').val();
 
 	/*
@@ -58,60 +58,8 @@ var baseURL = $('#base_url').val();
 	 });
 
 
-	 	   /*
-		SEND MESSAGE FROM STUDENT
-	   */
-	  $("#send-msg-prof").on('submit',function(e) {
-		
-		 var creds = $(this).serialize();
-
-		 $.ajax({
-			 type: "POST",
-			 url:  baseURL+'professors/send_msg',
-			 dataType: 'json',
-			 data: creds,
-			 success: function(data) {
-			 		$('textarea#msg').text("").focus();
-			 		 reloadMsgProf();
-			 	
-			 }
-		});
-		 	e.preventDefault();
-	 });
-
-
-	    /*
-	  GET MESSAGES FROM DB
-	  */ 
-	 function reloadMsgProf() {
-	 	var contents = "";
-	 	  $.ajax({
-			 type: "GET",
-			 url:  baseURL+'professors/get_msg_thread/'+$('#conversation_id').val(), 
-			 success: function(data) {
-			 	if(data.length == 0) {
-			 		contents = '<h3 class="text-center title">No Current Conversation</h3>';
-			 	} else {
-			 		$.each(data, function(index){
-			 		contents += "<small class='pull-right'> <time data-toggle='tooltip' data-placement='top' class='timeago' datetime='"+ data[index]['date_created'] +"'>"+  data[index]['date_created']+"</time></small> </br><div class='msg-single'>" + data[index]['msg'] + "</div>";
-			 		});
-			 	
-			 	}
-
-			 	 $('#msg-thread-box-prof').html(contents);
-			 	 $('#msg-thread-box-prof').scrollTop($("#msg-thread-box-prof")[0].scrollHeight);
-			
-	 			 $('.spin').hide();
-			 	
-			 }
-		});
-	 };
-	 		
+	 
 	
-	
-	 $("#conversation").on("shown.bs.modal", function() {
-	     reloadMsgProf();
-	});
 	 /*
 	RELOAD Profile Picture fro database
 	*/
@@ -300,7 +248,7 @@ var baseURL = $('#base_url').val();
 			 url:  baseURL+'professors/get_schedules', 
 			 success: function(data) {
 			 	if(data.length == 0) {
-			 		contents = '<div class="list-panel"><div class="list-body" style="height:300px; display: flex; align-items: center; justify-content: center;"><p class="text-center no-error"><i class="fa fa-frown-o"></i>&nbsp;&nbsp;No Schedules for today</p></div></div>';
+			 		contents = '<div class="list-panel"><div class="list-body" style="height:300px; display: flex; align-items: center; justify-content: center;"><p class="text-center no-error"><i class="fa fa-frown-o"></i>&nbsp;&nbsp;No Schedules for today.</p></div></div>';
 			 		$('#schedule-list').html(contents);
 			 	} else {
 			 		 $('#schedule-list').append(

@@ -10,7 +10,7 @@
 			<li class="active">Account</li>
 		</ol>
 
-	<h4><i class="fa fa-id-card-o"></i>&nbsp;&nbsp;General Account Settings</h4>
+	<h4><i class="fa fa-id-card-o"></i>&nbsp;&nbsp;General Account Settings</h4> <br><br>
 
 	<table class="table table-responsive table-hover">
 		<tbody>

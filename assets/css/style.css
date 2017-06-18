@@ -82,9 +82,10 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: 4px; }
 
 .no-result {
-  background-color: #f1f1f1;
-  padding: 10px 0px;
-  text-align: center; }
+  height: 249px;
+  display: flex;
+  align-items: center;
+  justify-content: center; }
 
 .fa-padding {
   padding: 7px; }
@@ -132,7 +133,7 @@ h1, h2, h3, h4, h5, h6 {
   .btn-student-sm:focus {
     text-decoration: none !important; }
 
-#recent-msg-prof-btn {
+.focus-btn {
   background: #56CCF2;
   /* fallback for old browsers */
   background: -webkit-linear-gradient(to right, #2F80ED, #56CCF2);
@@ -155,7 +156,8 @@ h1, h2, h3, h4, h5, h6 {
     background-color: #bf2718; }
 
 .send-btn {
-  border: 1px solid #3498db;
+  border-top: 1px solid #bddff9;
+  border-bottom: 1px solid #075793;
   background-color: #2196f3;
   padding: 4px 10px;
   border-radius: 4px;
@@ -388,7 +390,7 @@ ul.basic-container {
     overflow: auto;
     background-color: white;
     color: #607D8B;
-    padding: 20px 15px;
+    padding: 15px 15px;
     border: 1px solid rgba(158, 158, 158, 0.19); }
 
 .walkthrough {
@@ -533,5 +535,28 @@ td {
   /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to right, #FFD200, #F7971E);
   /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */ }
+
+.avatar:hover {
+  border-bottom: 2px solid #f1f1f1 !important; }
+.avatar a {
+  color: #777 !important; }
+
+#prof-hub {
+  background-color: white;
+  color: white;
+  padding: 20px 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  max-height: 500px;
+  min-height: 500px;
+  overflow: auto;
+  border: 2px dashed #777; }
+  #prof-hub .profile-head {
+    height: 40px;
+    width: 40px;
+    margin: 10px 5px;
+    border-radius: 50%; }
 
 /*# sourceMappingURL=style.css.map */

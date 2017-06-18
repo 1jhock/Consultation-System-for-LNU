@@ -81,7 +81,8 @@ Class Students extends CI_Controller {
 		// Get all the professors where department=student.course
 		$data['professors'] = $this->crud->get_specified('professors',['department' => $this->session->userdata('course')]);
 
-
+		// Get ALL professors
+		$data['all_profs'] = $this->crud->get_all('professors');
 
 		// GET the recent msg where sender is the user
 		$recent_msg = $this->crud->get_single('msg',['from_id'=> $this->session->userdata('stud_id')]);
@@ -513,27 +514,14 @@ Class Students extends CI_Controller {
 	}
 
 	function course_list($dept_id) {
-		$data['courses'] = $this->crud->get_specified('courses', ['dept_id' => $dept_id]);
+		$data['professors'] = $this->crud->get_specified('professors', ['department' => $dept_id]);
 		$data['department'] = $this->crud->get_single('department',['dept_id' => $dept_id]);
 		$this->load->view('templates/header');
 		$this->load->view('student/course_list',$data);
 		$this->load->view('templates/footer');
 	}
 
-	function professor_by_department($dept_id,$course_id) {
-		if($this->session->userdata('stud_id') == FALSE ) {
-			redirect('students','refresh');
-		}
-
-		$data['courses'] = $this->crud->get_single('courses', ['course_id' => $course_id]);
-		$data['department'] = $this->crud->get_single('department', ['dept_id' => $dept_id]);
-		$data['professors'] = $this->crud->get_specified('professors', ['department' => $course_id]);
-
-		$this->load->view('templates/header');
-		$this->load->view('student/professors_by_department', $data);
-		$this->load->view('templates/footer');
-	}
-
+	
 
 	/*AJAX Request*/
 	function current_professor($prof_id) {

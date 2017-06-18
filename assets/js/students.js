@@ -23,10 +23,11 @@ $(document).ready(function(){
 		dActiveLogin => hidden login
 		*/
 		function showlogin(activeBtn, activeLogin, dActiveBtn, dActiveLogin) {
+			var cur = $(this).target;
 			activeBtn.click(function(){
 				dActiveLogin.hide();
 				activeLogin.fadeIn();
-				$(this).addClass('active');
+				cur.addClass('active');
 				$(dActiveBtn).removeClass('active');
 			});
 		}
@@ -63,32 +64,8 @@ $(document).ready(function(){
 	 });
 
 
-
-	 
-
-	   /*========================== SEND MESSAGE FROM STUDENT ==========================*/
-	  $("#send-msg").on('submit',function(e) {
-		
-		 var creds = $(this).serialize();
-
-		 $.ajax({
-			 type: "POST",
-			 url:  baseURL+'students/send_msg',
-			 dataType: 'json',
-			 data: creds,
-			 success: function(data) {
-			
-			 		$('textarea#msg').val("").focus();
-			 		
-			 		 setInterval(reloadMsgStud(), 5000);
-			 }
-		});
-		 	e.preventDefault();
-	 });
-
-	
-
-	  /*======================== GET MESSAGES FROM DB ================================*/
+	  	  /*======================== GET MESSAGES FROM DB ================================*/
+	  // Message threads for Students
 	 function reloadMsgStud() {
 	 	var contents = "";
 	 	  $.ajax({
@@ -112,10 +89,91 @@ $(document).ready(function(){
 		});
 
 	 };
-	 		
-	
-	setTimeout(reloadMsgStud(), 5000);
 
+	 // Message thread for professors
+	 function reloadMsgProf() {
+	 	var contents = "";
+	 	  $.ajax({
+			 type: "GET",
+			 url:  baseURL+'professors/get_msg_thread/'+$('#conversation_id').val(), 
+			 success: function(data) {
+			 	if(data.length == 0) {
+			 		contents = '<h3 class="text-center title">No Current Conversation</h3>';
+			 	} else {
+			 		$.each(data, function(index){
+			 		contents += "<small class='pull-right'> <time data-toggle='tooltip' data-placement='top' class='timeago' datetime='"+ data[index]['date_created'] +"'>"+  data[index]['date_created']+"</time></small> </br><div class='msg-single'>" + data[index]['msg'] + "</div>";
+			 		});
+			 	
+			 	}
+
+			 	 $('#msg-thread-box-prof').html(contents);
+			 	 $('#msg-thread-box-prof').scrollTop($("#msg-thread-box-prof")[0].scrollHeight);
+			
+	 			 $('.spin').hide();
+			 	
+			 }
+		});
+	 };
+
+	 // Handlr for both messages' message reload
+	 function msgReloadHandlr() {
+	 	reloadMsgStud();
+	 	reloadMsgProf();
+	 }
+	 		
+	setTimeout(msgReloadHandlr(), 5000);
+
+	// Reload Msgs inside prof-modal
+	 $("#conversation").on("shown.bs.modal", function() {
+	     reloadMsgProf();
+	});
+
+	 
+
+	   /*========================== SEND MESSAGE FROM STUDENT ==========================*/
+	  $("#send-msg").on('submit',function(e) {
+		
+		 var creds = $(this).serialize();
+
+		 $.ajax({
+			 type: "POST",
+			 url:  baseURL+'students/send_msg',
+			 dataType: 'json',
+			 data: creds,
+			 success: function(data) {
+			
+			 		$('textarea#msg').val("").focus();
+			 		
+			 		setTimeout(msgReloadHandlr(), 1000);
+			 }
+		});
+		 	e.preventDefault();
+	 });
+
+	 /*=================== SEND MESSAGE FROM STUDENT =====================*/
+	  $("#send-msg-prof").on('submit',function(e) {
+		
+		 var creds = $(this).serialize();
+
+		 $.ajax({
+			 type: "POST",
+			 url:  baseURL+'professors/send_msg',
+			 dataType: 'json',
+			 data: creds,
+			 success: function(data) {
+
+			 		$('textarea#msg').text("").focus();
+			 		 
+			 		 setTimeout(msgReloadHandlr(), 1000);
+			 	
+			 }
+		});
+		 	e.preventDefault();
+	 });
+
+
+
+	
 
 	/*===================================== SIGNUP FOR STUDENTS ===============================*/
 	$('#signup_stud').on('submit', function(e) {
@@ -452,6 +510,11 @@ $(document).ready(function(){
 		});
 
 	}());
+
+	// ACTIVATE BOOTSTRAP TOOLTIP
+
+    $('[data-toggle="tooltip"]').tooltip(); 
+
 	
 });
 

@@ -13,33 +13,7 @@
 	</ol>
 	<h1 class="text-center title"><?=$courses->full_name?></h1>	
 	<br><br>
-	<div class="row">
-		<div class="col-lg-12">
-			<?php if(empty($professors)) : ?>
-				<div class="no-result"><i class="fa fa-frown-o"></i>No professors</div>
-			<?php else : ?>
-			<table class="table table-hover table-striped">
-				<thead>
-					<tr>
-						<th>Name</th>
-						<th>Email</th>
-						<th>About me</th>
-					</tr>
-				</thead>
-				<tbody>
-					<?php foreach($professors as $professor) : ?>
-						<tr>
-							<td><img src="<?=asset_url()?>uploads/<?=$professor->img?>" alt="Profile Picture" class="img-circle" style="height: 30px; width: auto">&nbsp;&nbsp;<?=$professor->name?></td>
-							<td><?=$professor->email?></td>
-							<td><?=$professor->about?></td>
-							<td style="display: flex; align-items: center;"><a class="btn-student-sm show-profile" data-id="<?=$professor->prof_id?>" data-toggle="modal" href="#myModals">Show other info</a></td>
-						</tr>
-					<?php endforeach; ?>
-				</tbody>
-			</table>
-			<?php endif; ?>
-		</div>
-	</div>
+	
 </div>
 
 

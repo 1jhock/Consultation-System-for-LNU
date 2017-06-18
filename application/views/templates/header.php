@@ -28,16 +28,14 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
-       
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="" alt="Profile Picture" class="profile-picture" id="profile-picture">&nbsp;<?=$this->session->userdata('name')?>&nbsp;<span class="caret"></span></a>
-          <ul class="dropdown-menu">
-   
+          <li  class="avatar">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="" alt="Profile Picture" class="profile-picture" id="profile-picture">&nbsp;<?=$this->session->userdata('name')?></a>
+          </li>
+         
             <li><a href="<?=base_url()?>students/account/<?=$this->session->userdata('stud_id')?>"><i class="fa fa-wrench"></i>&nbsp;Account</a></li>
-             <li role="separator" class="divider"></li>
+
             <li><a href="<?=base_url()?>students/logout"><i class="fa fa-sign-out"></i>&nbsp;Logout</a></li>
-          </ul>
-        </li>
+
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
@@ -59,8 +57,8 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
-          <li><a href=""><?=$this->session->userdata('name')?>&nbsp;&nbsp;<img src="" alt="Profile Picture" class="profile-picture" id="profile-picture"></a></li>
-          <li><a href="<?=base_url()?>professors/students_list"><i class="fa fa-mortar-board"></i>&nbsp;List of Students</a></li>
+          <li class="avatar"><a href=""><?=$this->session->userdata('name')?>&nbsp;&nbsp;<img src="" alt="Profile Picture" class="profile-picture" id="profile-picture"></a></li>
+          <li><a href="<?=base_url()?>professors/courses"><i class="fa fa-mortar-board"></i>&nbsp;List of Students</a></li>
           <li><a href="<?=base_url()?>professors/account/<?=$this->session->userdata('prof_id')?>"><i class="fa fa-wrench"></i>&nbsp;Account</a></li>
           <li><a href="<?=base_url()?>professors/logout"><i class="fa fa-sign-out"></i>&nbsp;Logout</a></li>
       </ul>

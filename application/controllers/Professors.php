@@ -530,17 +530,25 @@ Class Professors extends CI_Controller {
 		echo $json;
 	}
 
-	function students_list() {
+	function courses() {
 		if($this->session->userdata('prof_id') == FALSE ) {
 			redirect('professors','refresh');
 		}
 
 		$data['dept'] = $this->crud->get_dept($this->session->userdata('department'));
 
-		$data['students'] = $this->crud->get_all('students');
+		$data['courses'] = $this->crud->get_course_data($this->session->userdata('department'));
 
 		$this->load->view('templates/header');
-		$this->load->view('professor/students_list', $data);
+		$this->load->view('professor/courses', $data);
+		$this->load->view('templates/footer');
+	}
+
+	function students_list($course_id) {
+		$data['students'] = $this->crud->get_specified('students', ['course' => $course_id]);
+		$data['cur_course'] = $course_id;
+		$this->load->view('templates/header');	
+		$this->load->view('professor/students_list',$data);
 		$this->load->view('templates/footer');
 	}
 
