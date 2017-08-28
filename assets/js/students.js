@@ -23,12 +23,12 @@ $(document).ready(function(){
 		dActiveLogin => hidden login
 		*/
 		function showlogin(activeBtn, activeLogin, dActiveBtn, dActiveLogin) {
-			var cur = $(this).target;
+			var cur = $(this);
 			activeBtn.click(function(){
 				dActiveLogin.hide();
 				activeLogin.fadeIn();
-				cur.addClass('active');
-				$(dActiveBtn).removeClass('active');
+				cur.addClass('.active');
+				$(dActiveBtn).removeClass('.active');
 			});
 		}
 
@@ -467,13 +467,13 @@ $(document).ready(function(){
 
 					 	contents += "<img src='"+assetURL+"uploads/"+data.personal['img']+"' alt='Profile Picture' class='img-responsive img-circle center-block current-img'>";
 					 	contents += "<h1 class='text-center title'>"+data.personal['name']+"</h1>";
-					 	contents += "<p class='text-center secondary-text'>"+data.personal['about']+"</p>";
+					 	contents += "<p class='text-center secondary-text' style='margin-top: 10px;'>"+data.personal['about']+"</p>";
 					 	contents += "<small class='pull-right'><a href='"+baseURL+"students/message/"+data.personal['prof_id']+"' class='send-btn'><i class='fa fa-comment-o'></i>&nbsp;Send Message</a></small> <br /><br />";
 					 	contents += `<table class="table">
 									<tbody>`;
-						contents += "<tr><td>Department</td>";
+						contents += "<tr><td><strong>Department</strong></td>";
 						contents += "<td>" + data[0] + "</td></tr>";
-						contents += "<tr><td>Email Address</td>"
+						contents += "<tr><td><strong>Email Address</strong></td>"
 					 	contents += "<td>" + data.personal['email'] + "</td><tr/>";
 						contents += `</tbody>
 										</table>`;

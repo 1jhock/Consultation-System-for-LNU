@@ -6,8 +6,8 @@
 <script type="text/javascript" src="<?=asset_url()?>js/jquery.timeago.js"></script>
 <script type="text/javascript" src="<?=asset_url()?>js/students.js"></script>
 <script type="text/javascript" src="<?=asset_url()?>js/professors.js"></script>
-<script  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDjN4gZko9-3glnHU0yCoJhf5dcC8hKckU"
-  type="text/javascript"></script>
+<script  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDzGPinTMZwzz2rsEiZ4-IcMSGG4sS-w3o&callback=initMap"
+ ></script>
 <script type="text/javascript" src="<?=asset_url()?>js/map.js"></script>
 </body>
 </html>

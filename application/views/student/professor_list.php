@@ -13,6 +13,7 @@
 	<div class="row">
 		<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
 			<div class="course-container">
+			
 				<a href="<?=base_url()?>students/course_list/1">
 					<img src="<?=asset_url()?>img/BSIT.jpg" alt="" class="img-responsive course-img center-block">
 					
@@ -51,7 +52,7 @@
 		<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
 			<div class="course-container">
 				<a href="<?=base_url()?>students/course_list/3">
-					<img src="<?=asset_url()?>img/CE.jpg" alt="" class="img-responsive course-img center-block">
+					<img src="<?=asset_url()?>img/BSED.jpg" alt="" class="img-responsive course-img center-block">
 					<div class="overlay center-block">
 						<h2 class="text-center title"><i class="fa fa-puzzle-piece"></i><br>Mathematics Department</h2> <br>
 						<div class="overlay-block">
@@ -71,7 +72,8 @@
 		<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
 			<div class="course-container">
 				<a href="<?=base_url()?>students/course_list/4">
-					<img src="<?=asset_url()?>img/BSED.jpg" alt="" class="img-responsive course-img center-block">
+					
+					<img src="<?=asset_url()?>img/BEED.jpg" alt="" class="img-responsive course-img center-block">
 					<div class="overlay center-block">
 						<h2 class="text-center title"><i class="fa fa-institution"></i><br>Humanities Department</h2> <br>
 						<div class="overlay-block">
@@ -89,7 +91,8 @@
 		<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
 			<div class="course-container">
 				<a href="<?=base_url()?>students/course_list/6">
-					<img src="<?=asset_url()?>img/BEED.jpg" alt="" class="img-responsive course-img center-block">
+					
+						<img src="<?=asset_url()?>img/CE.jpg" alt="" class="img-responsive course-img center-block">
 					<div class="overlay center-block">
 						<h2 class="text-center title"><i class="fa fa-rocket"></i><br>Engineering Department</h2> <br>
 						<div class="overlay-block">

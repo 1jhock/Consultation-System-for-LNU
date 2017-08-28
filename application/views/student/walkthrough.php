@@ -1,5 +1,5 @@
 <div class="walkthrough">
-		<div id="heading"><h1 class="title">Welcome</h1></div>
+		<div id="heading"><h1 class="title text-center">Welcome!</h1></div>
 		<div id="component">
 			<div class="menu">
 				<h1 class="title">Let's get started</h1> <br>

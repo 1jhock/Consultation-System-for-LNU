@@ -168,12 +168,9 @@ Class Students extends CI_Controller {
 	}
 
 	function walkthrough() {
-
 		if($this->session->userdata('stud_id') == TRUE ) {
 			redirect('students','refresh');
 		}
-
-
 		$this->load->view('templates/header');
 		$this->load->view('student/walkthrough');
 		$this->load->view('templates/footer');

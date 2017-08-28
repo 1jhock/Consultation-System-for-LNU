@@ -40,7 +40,7 @@
 					<label for="password">Verify Password</label>
 					<input type="password" class="form-control" name="repassword" id="repassword" placeholder="Type your password again">
 				</div>
-				<div class="form-group"><button class="btn-prof-sm pull-right" type="submit">Create</button></div>
+				<div class="form-group"><a href="<?=base_url()?>" class="back"><i class="fa fa-arrow-circle-left"></i>&nbsp;back</a><button class="btn-prof-sm pull-right" type="submit">Create</button></div>
 			</form>
 		</div>
 	</div>

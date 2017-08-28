@@ -311,7 +311,7 @@ $(document).ready(function(){
 					 		resultString += "<td><img src='"+assetURL+"uploads/"+value.img+"' alt='Profile' style='width:60px' /></td>";
 					 		resultString += `<td>
 					 							<h3 class="title" id="name-result">`+value.name+`</h3>
-					 							<small><a href=""><i class="fa fa-comment" style="color: #3498db"></i>&nbsp;&nbsp;Message</a></small>&nbsp;&nbsp;&nbsp;<small><a href=""><i class="fa fa-address-book" style="color: #e74c3c"></i>&nbsp;&nbsp;Profile</a></small>
+					 							<small><a href="`+baseURL+"professors/message/"+value.stud_id+`"><i class="fa fa-comment" style="color: #3498db"></i>&nbsp;&nbsp;Message</a></small>
 					 					    </td>`;
 					 		resultString += "</tr>";
 				 		});

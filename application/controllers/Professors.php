@@ -1,4 +1,4 @@
-<?php
+	<?php
 /*
 	"_" prefix means not a page.
 */
@@ -270,7 +270,6 @@ Class Professors extends CI_Controller {
 
 	/*AJAX REQUEST*/
 	function get_msg_thread($conversation_id) {
-
 		header('Content-Type: application/json'); 
 		// GET all the conversation where the conversation_id = $conversation_id
 		// ::$conversation_id above is appended using JS from its AJAX Request
@@ -279,7 +278,18 @@ Class Professors extends CI_Controller {
 		$json = json_encode($data['msgs']);	
 		/*GET THE CONV ID*/
 		echo $json;
+	}
 
+	/*AJAX REQUEST*/
+	function get_recent_msg_thread($conversation_id) {
+			header('Content-Type: application/json'); 
+		// GET all the conversation where the conversation_id = $conversation_id
+		// ::$conversation_id above is appended using JS from its AJAX Request
+		$data['msgs'] =  $this->crud->get_specified('msg', ['conversation_id'=> $conversation_id]);
+
+		$json = json_encode($data['msgs']);	
+		/*GET THE CONV ID*/
+		echo $json;
 	}
 
 	function account($id) {
@@ -515,7 +525,8 @@ Class Professors extends CI_Controller {
 		$json = json_encode($data['schedules']);
 
 		echo $json;
-	
+		
+
 	
 	}
 

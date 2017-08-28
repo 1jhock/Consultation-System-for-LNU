@@ -1,45 +1,47 @@
-# Consultation written in PHP CodeIgniter
-A one-way consultation system for Students and Professors in University
-
-### Users Controller
-`users/signup`
-	..*add new data
-
-`users/login`
-	..*check if username || password exist
-	..*if true, set session
-
-`users/create_msg`
-	..*add msg [from:session_id, to:spec_prof_id, body, status:i.e.Pending]
-
-`users/view_all_msg`
-	..*select * 'pending' msg
-
-`users/cur_msg`
-	..*select cur_msg where $_GET[msg_id]
-
-`users/view_msg_thread`
-	..*select * from msg WHERE
-  	(senderid = $otheruser
-  	 AND recipientid = $currentuser)
- 	 OR
-  	(senderid = $currentuser
-  	 AND recipientid = $otheruser)
-
-`users/view_professors`
-	..*select * from professors
-
-`users/view_cur_prof`
-	..*select cur_prof
+# Faculty Consultation Software
+The idea was to create a computer kiosk inside university. In this way, it will be easier for students to talk to any faculty members of the university. There are two types of account: **Student's account** and the **Professor's account**. Both accounts are organized and will keep the consultation easier.
 
 
-### Professors Controller
-####Same as above
-`professors/signup
-professors/login
-professors/create_msg
-professors/view_all_msg
-professors/cur_msg
-professors/view_students
-professors/view_cur_student
-`
+# Features
+
+## Login
+![alt text](screenshots/login.png "Login Page")
+
+## Signup
+![alt text](screenshots/signup.png "Signup Page")
+
+## Update Account
+![alt text](screenshots/update.png "Update Account Page")
+
+## Student's Page
+![alt text](screenshots/student-dash.png "Student's Page")
+
+## Message 
+![alt text](screenshots/cur_msg.png "Message")
+
+## Map
+Simple map of the university and its buildings in marker.
+![alt text](screenshots/map.png "University Map")
+
+## Street View
+Available streetview for the actual map.
+![alt text](screenshots/streetview.png "Street View")
+
+## Departments
+![alt text](screenshots/prof_by_dept.png "Departments")
+
+## Current Department
+![alt text](screenshots/cur_dept.png "Current Department")
+
+## Professor's Info
+![alt text](screenshots/cur_prof.png "Professor")
+
+## Professor's Page
+![alt text](screenshots/prof-dash.png "Professor's Page")
+
+## Adding Professor's Schedule
+The schedule will make student know where you are at the current moment.
+![alt text](screenshots/add-sched.png "Login Page")
+
+## List of Students by Course
+![alt text](screenshots/list-student.png "List of Students")

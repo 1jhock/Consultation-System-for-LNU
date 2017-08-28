@@ -23,6 +23,7 @@ Class Crud extends CI_Model {
 	} 
 
 
+
 	function get_recent($table, $order) {
 		$this->db->select()->from($table)->order_by('date_created',$order);
 		$single = $this->db->get();
@@ -84,7 +85,7 @@ Class Crud extends CI_Model {
 	}
 
 	function search_result($keyword) {
-		$this->db->select('name, course, img')->from('students');
+		$this->db->select('name, course, img, stud_id')->from('students');
 		$this->db->like('name', $keyword);
 		$results = $this->db->get();
 		return $results->result();
@@ -116,7 +117,7 @@ Class Crud extends CI_Model {
 	function get_total_unread_frm_stud($prof_id, $stud_id) {
 		$unread = $this->crud->get_total_where('msg', ['to_id' => $prof_id, 'from_id' => $stud_id, 'status' => 0]);
 
-		return ($unread > 0) ? '&nbsp;&nbsp;<span class="badge">'.$unread .'</span>': '';
+		return ($unread > 0) ? '&nbsp;&nbsp;<span class="badge" style="background-color: #e74c3c;">'.$unread .'</span>': '';
 	}
 
 

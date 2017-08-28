@@ -2,12 +2,12 @@
 	<div class="col-lg-12">
 		<div id="home-page">
 	<!-- HEADER -->
-	<div class="header">
+<!-- 	<div class="header">
 		<ul>
 			<li><a href="about">About</a></li>
 			<li><a href="instruction">Instructions</a></li>
 		</ul>
-	</div>
+	</div> -->
 	<!-- END -->
 	<h1 class="white-text text-center title">Student Consultation System</h1>
 	

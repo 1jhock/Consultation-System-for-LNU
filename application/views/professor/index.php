@@ -13,10 +13,10 @@
 	<br>
 	<br>
 	<div class="row">
-		<div class="col-lg-4">
+		<div class="col-lg-3">
 			<div class="list-panel">
 				<div class="list-body glance">
-					<h2 class="title text-center">Students</h2>
+					<h1 class="title text-center">Students</h1>
 					<div class="glance-container mx-auto" id="student">
 						<div class="fa fa-user-circle fa-5x"></div>
 					</div>
@@ -33,10 +33,10 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-lg-4">
+		<div class="col-lg-3">
 			<div class="list-panel">
 				<div class="list-body glance">
-					<h2 class="title text-center">Unread</h2>
+					<h1 class="title text-center">Unread</h1>
 					<div class="glance-container mx-auto" id="unread">
 						<fa class="fa fa-envelope fa-5x"></fa>
 					</div>
@@ -51,10 +51,10 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-lg-4">
+		<div class="col-lg-3">
 			<div class="list-panel">
 				<div class="list-body glance">
-					<h2 class="title text-center">Interactions</h2>
+					<h1 class="title text-center">Interactions</h1>
 					<div class="glance-container mx-auto" id="inter">
 						<div class="fa fa-retweet fa-5x"></div>
 					</div>
@@ -69,31 +69,45 @@
 				</div>
 			</div>
 		</div>
+		<div class="col-lg-3">
+			
+				<?php date_default_timezone_set('Asia/Kuala_Lumpur') //for PHL  ?> 
+				<h1 class="title"><?= date('l') ?></h1>
+				<small><a data-toggle="modal" href="#schedule"><i class="fa fa-plus"></i>&nbsp;Add Schedule</a></small>
+		
+			
+			<div class="list-body" id='schedule-list'>
+				<i class="fa fa-refresh fa-spin fa-3x fa-fw center-block loading-sched" aria-hidden="true"></i>
+			</div>
+		</div>
 	</div>
 	<br>
 	<br>
 	<br>
 	<div class="row">
-		<div class="col-lg-3">
-					<h1 class="title">Students</h1>
-					<small class="secondary-text"><?= $this->crud->get_dept($this->session->userdata('department')) ?></small>
+		<div class="col-lg-9">
+				
 		
 			<div class="list-panel">
 				
 				<div class="list-body">
+					<h1 class="title text-right">Students</h1>
+					<small class="secondary-text pull-right"><?= $this->crud->get_dept($this->session->userdata('department')) ?></small>
+					<br><br>
+					<hr>
 					<div class="list-msg">
 						<?php if(!empty($students)) : ?>
 						<?php foreach($students as $student) :?>
+							 <small class="pull-right"><a href="<?=base_url()?>professors/message/<?=$student->stud_id?>" class='send-btn'><i class="fa fa-comment-o"></i>&nbsp;Send Message</a></small>
 							 <div class="media">
 								    <div class="media-left">
 								      <img src="<?=asset_url()?>uploads/<?=$student->img?>" class="media-object img-fluid rounded-circle" style="width:60px">
 								    </div>
 								    <div class="media-body">
 								    	<?php date_default_timezone_set('Asia/Kuala_Lumpur'); //for PHL ?>
-								      <h4 class="media-heading"><?=$student->name?></h4>
+								      <h4 class="media-heading"><?=$student->name?><?=$this->crud->get_total_unread_frm_stud($this->session->userdata('prof_id'), $student->stud_id)?></h4>
 								      <p class="secondary-text"> <?=$student->email?>
-								  	<br>
-								      <small><a href="<?=base_url()?>professors/message/<?=$student->stud_id?>" class='send-btn'><i class="fa fa-comment-o"></i>&nbsp;Send Message<?=$this->crud->get_total_unread_frm_stud($this->session->userdata('prof_id'), $student->stud_id)?></a></small>
+
 								    </div>
 								  </div>
 								  <hr>
@@ -108,55 +122,49 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-lg-6">
+<!-- 		<div class="col-lg-6">
 			<h1 class="title">Messages</h1>
 			<small class="secondary-text">Unread Messages from students</small>
-			<div class="list-panel">
-				<div class="list-body">
+	
+			<div id="list-container">
 					<div class="list-group">
-						<?php if(empty($conversations)) : ?>
-							<p class="text-center no-result">
-								<i class="fa fa-frown-o"></i>&nbsp;&nbsp;No unread messages.
-							</p>
-						<?php else : ?>
-							<?php foreach($conversations as $conversation) : ?>
-							<a href="<?=base_url()?>professors/current_message/<?=$this->crud->get_sender_id($conversation->conversation_id)?>" class="list-group-item">
-								<div class="media">
-								  <div class="media-left">
-								  	<img class="media-object img-responsive" style="height: 50px; width: 50px;" src="<?=asset_url()?>uploads/jack2.jpg" alt="Generic placeholder image">
-								  </div>
-								  <div class="media-body">
-								    <h5 class="media-heading"><?=$this->crud->get_sender($this->crud->get_sender_id($conversation->conversation_id))?></h5>
-								    <p><?php 
-								    	$msgs = explode(",", $conversation->msgs, 1 );
+					<?php if(empty($conversations)) : ?>
+								<p class="text-center no-result">
+									<i class="fa fa-frown-o"></i>&nbsp;&nbsp;No unread messages.
+								</p>
+							<?php else : ?>
+								<?php foreach($conversations as $conversation) : ?>
+								<a href="<?=base_url()?>professors/current_message/<?=$this->crud->get_sender_id($conversation->conversation_id)?>" class="list-group-item">
+									<div class="media">
+									  <div class="media-left">
+									  	<img class="media-object img-fluid img-circle" style="width:35px" src="<?=asset_url()?>uploads/jack2.jpg" alt="Generic placeholder image">
+									  </div>
+									  <div class="media-body">
+									    <h5 class="media-heading"><strong><?=$this->crud->get_sender($this->crud->get_sender_id($conversation->conversation_id))?></strong></h5>
+									    <p><?php 
+									    	$msgs = explode(",", $conversation->msgs, 1 );
 
-								    	foreach($msgs as $id => $msg) {
-								    		echo substr($msg, 0, 10)  . ' ...more';
-								    	} 
+									    	foreach($msgs as $id => $msg) {
 
-								    	?>	
-								    </p>
-								  </div>
-								</div>
-							</a>
-						<?php endforeach; ?>
-						<?php endif; ?>
-					</div>
+									    		if(strlen(substr($msg, 0,   strpos($msg, ','))) > 20) {
+									    			echo $msg . '...';
+									    		} else {
+									    			echo substr($msg, 0,   strpos($msg, ','));
+									    		}
+									    	} 
+
+									    	?>	
+									    </p>
+									  </div>
+									</div>
+								</a>
+							<?php endforeach; ?>
+							<?php endif; ?>
 				</div>
 			</div>
-		</div>
+		</div> -->
 		<!--  -->
-		<div class="col-lg-3">
-		
-				<?php date_default_timezone_set('Asia/Kuala_Lumpur') //for PHL  ?> 
-				<h1 class="title"><?= date('l') ?></h1>
-				<small><a data-toggle="modal" href="#schedule"><i class="fa fa-plus"></i>&nbsp;Add Schedule</a></small>
-		
-			
-			<div class="list-body" id='schedule-list'>
-				<i class="fa fa-refresh fa-spin fa-3x fa-fw center-block loading-sched" aria-hidden="true"></i>
-			</div>
-		</div>
+	
 	</div>	
 </div>
 
